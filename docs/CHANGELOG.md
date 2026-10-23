@@ -14,4 +14,6 @@ All notable changes and task card completions are documented here.
 - **Phase 3 (Employee Punch Flow & PWA)**: Deployed senior-friendly punch UI with 56px+ tap targets, WebP photo compression with burned-in watermarks, Mode C off-site time out, PWA manifest, service worker caching, and My Attendance History modal.
 - **Phase 4 (Attendance & Time Engine)**: Built core time engine with 25 table-driven unit tests verifying tardiness, undertime, overnight shifts, and meal deduction rules.
 - **Phase 5 (Admin & SysAd Dashboards)**: Implemented wireframe-aligned Live Attendance dashboard with 4-card metric strip (`Clocked in`, `Not yet in`, `Late today`, `Off-site Time Out`), selfie signed-URL lightbox, Staff & Shifts 2-column manager (`Shift templates` and `Staff` with interactive Mode C toggle), punch attendance corrections with mandatory audit logging (Card 5.5), and SysAd Photo Storage manager with 60-day auto-purge policy.
+- **Phase 6 (Payroll Export & Housekeeping)**: Implemented wireframe-matching Payroll Export center with branch/period filter, ledger preview table (`Code`, `Employee`, `Days present`, `Total hours`, `Late (min)`, `Undertime (min)`, `Incomplete days`), UTF-8 BOM CSV export, Excel SpreadsheetML export, 60-day auto-purge verification, and verified payroll calculation against hand-calculated totals.
+
 
