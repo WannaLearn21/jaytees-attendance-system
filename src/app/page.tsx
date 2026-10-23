@@ -25,6 +25,7 @@ import { PhotoStorageManager } from "@/components/PhotoStorageManager";
 import BranchGeofencesControls from "@/components/BranchGeofencesControls";
 import PayrollExportCenter from "@/components/PayrollExportCenter";
 import { MobilePunchStation } from "@/components/MobilePunchStation";
+import { PilotAuditView } from "@/components/PilotAuditView";
 
 type ActiveScreen =
   | "live-attendance"
@@ -32,7 +33,9 @@ type ActiveScreen =
   | "payroll-export"
   | "branches-and-geofence"
   | "photo-storage"
+  | "pilot-audit"
   | "punch-station";
+
 
 export default function JayteesAttendanceApp() {
   const [activeScreen, setActiveScreen] =
@@ -424,6 +427,22 @@ export default function JayteesAttendanceApp() {
                       </span>
                       <span>Photo storage</span>
                     </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveScreen("pilot-audit")}
+                      className={`w-full text-left px-3 py-2.5 rounded-lg text-[15px] font-semibold transition-all flex items-center gap-2.5 ${
+                        activeScreen === "pilot-audit"
+                          ? "bg-[#1B1B1A] text-white shadow-xs"
+                          : "text-[#1B1B1A] hover:bg-slate-100"
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-[18px]">
+                        verified
+                      </span>
+                      <span>Pilot and rollout</span>
+                    </button>
+
                   </>
                 )}
               </>
@@ -577,6 +596,14 @@ export default function JayteesAttendanceApp() {
               auditLogs={auditLogs}
             />
           )}
+
+          {activeScreen === "pilot-audit" && (
+            <PilotAuditView
+              branches={branches}
+              employees={employees}
+            />
+          )}
+
 
           {activeScreen === "punch-station" && (
             <MobilePunchStation

@@ -15,5 +15,7 @@ All notable changes and task card completions are documented here.
 - **Phase 4 (Attendance & Time Engine)**: Built core time engine with 25 table-driven unit tests verifying tardiness, undertime, overnight shifts, and meal deduction rules.
 - **Phase 5 (Admin & SysAd Dashboards)**: Implemented wireframe-aligned Live Attendance dashboard with 4-card metric strip (`Clocked in`, `Not yet in`, `Late today`, `Off-site Time Out`), selfie signed-URL lightbox, Staff & Shifts 2-column manager (`Shift templates` and `Staff` with interactive Mode C toggle), punch attendance corrections with mandatory audit logging (Card 5.5), and SysAd Photo Storage manager with 60-day auto-purge policy.
 - **Phase 6 (Payroll Export & Housekeeping)**: Implemented wireframe-matching Payroll Export center with branch/period filter, ledger preview table (`Code`, `Employee`, `Days present`, `Total hours`, `Late (min)`, `Undertime (min)`, `Incomplete days`), UTF-8 BOM CSV export, Excel SpreadsheetML export, 60-day auto-purge verification, and verified payroll calculation against hand-calculated totals.
+- **Phase 7 (Pilot & Rollout)**: Established Pilot & Rollout Center (`src/components/PilotAuditView.tsx`) with dual-tracking comparison (Paper card vs. JATS Digital, ±3m tolerance), calibrated Tagaytay ridge geofences (150m Maharlika, 120m Rotunda, 180m Perfect View), completed Senior Usability audit with 64px tap targets and unassisted punch verification, authored 3-branch paper card decommissioning plan in `docs/pilot-runbook.md`, and achieved full MVP feature completeness.
+
 
 
