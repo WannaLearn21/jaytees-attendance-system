@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-fixed-dim":"#ffb4ac","on-background":"#131b2e","on-tertiary-container":"#75d2ab","tertiary":"#00402d","surface-container-low":"#f2f3ff","surface-container":"#eaedff","surface-dim":"#d2d9f4","error-container":"#ffdad6","surface-container-highest":"#dae2fd","on-error-container":"#93000a","on-primary-container":"#ffaaa1","inverse-on-surface":"#eef0ff","surface-container-high":"#e2e7ff","background":"#faf8ff","tertiary-fixed-dim":"#7bd8b1","on-surface-variant":"#59413e","surface-bright":"#faf8ff","secondary-container":"#fe932c","on-secondary-fixed":"#2f1500","secondary-fixed-dim":"#ffb77d","on-primary-fixed-variant":"#8e1214","tertiary-container":"#005a40","on-secondary-fixed-variant":"#6e3900","primary-fixed":"#ffdad6","on-primary-fixed":"#410002","secondary":"#904d00","surface-tint":"#b02d29","surface-variant":"#dae2fd","on-surface":"#131b2e","inverse-surface":"#283044","on-tertiary-fixed-variant":"#00513a","on-tertiary-fixed":"#002115","outline":"#8d706d","on-secondary-container":"#663500","outline-variant":"#e1bfbb","primary-container":"#991b1b","surface":"#faf8ff","primary":"#760009","surface-container-lowest":"#ffffff","secondary-fixed":"#ffdcc3","inverse-primary":"#ffb4ac","on-secondary":"#ffffff","on-error":"#ffffff","on-primary":"#ffffff","tertiary-fixed":"#97f5cc","on-tertiary":"#ffffff","error":"#ba1a1a"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"space-lg":"1.5rem","gutter":"1.5rem","space-xs":"0.25rem","space-md":"1rem","margin":"2rem","gutter-mobile":"1rem","margin-mobile":"1rem","space-xl":"2.5rem","space-sm":"0.5rem"},fontFamily:{"headline-xl":["Plus Jakarta Sans"],"body-lg":["Inter"],"headline-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-md":["Inter"],"body-sm":["Inter"],"headline-xl-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"data-mono":["Inter"],"label-lg":["Inter"],"label-sm":["Inter"],"display-lg":["Plus Jakarta Sans"],"body-md":["Inter"]},fontSize:{"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-xl-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"data-mono":["14px",{"lineHeight":"20px","letterSpacing":"0.05em","fontWeight":"500"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"display-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-low"><div class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></div><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Attendance Engine Core</span></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Operational Navigation</div><nav class="flex flex-col gap-space-xs mt-space-xs" data-active-classes="bg-primary-container text-on-primary font-label-lg shadow-sm"><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-all bg-primary-container text-on-primary font-label-lg shadow-sm" data-path="dashboard" href="01-live-operations-selfie-feed.html"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-lg text-label-lg">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="branch-geofences-and-mode-c-controls" href="03-branch-geofences-mode-c-controls.html"><span class="material-symbols-outlined text-[20px]">share_location</span><span class="font-label-lg text-label-lg">Branch Geofences & Controls</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="shift-scheduling" href="05-shift-scheduling-grace-periods.html"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-label-lg text-label-lg">Shift Scheduling</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="payroll-csv-and-export-center" href="04-payroll-export-storage-center.html"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-label-lg text-label-lg">Payroll CSV & Export</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="senior-punch-station-simulator" href="02-mobile-punch-station-senior-friendly.html"><span class="material-symbols-outlined text-[20px]">pin_invoke</span><span class="font-label-lg text-label-lg">Punch Station Simulator</span></a></nav></div></div><div class="p-space-md bg-surface-container-low m-space-md rounded-xl"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Supabase Cache</span><span class="font-label-sm text-label-sm text-tertiary-container font-semibold">18% Used</span></div><div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-space-xs overflow-hidden"><div class="bg-tertiary-container h-full w-[18%]"></div></div><div class="flex items-center justify-between mt-space-xs"><span class="font-body-sm text-body-sm text-on-surface-variant">Purge Active</span><span class="font-data-mono text-data-mono text-[11px] text-on-surface-variant">180MB/1GB</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40"><div class="h-16 w-full px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><img alt="Jaytees JATS Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WgTi7Su6t-fPtyPdTTc82maHpoZDxTBCKv8Oaa1Jsz1asN70muzMbxY5qOvteOqxMTiIaDKFGPfLLmRlqjeNrxyuaDdmJH5kJDgxukWy_DzjSDuML1kx86os4hDTCnaTk9wwQ0rxp6K3fS9MjJbNGOO5xsd5O7Ai4QXCDqSDIcsuv41YJmh9fJLScV6rF7Ghzz8AvRuwEHUpqHdGhAtr2HBaT3PMs5P3HMRRskEM_U6Z09icIg0WcDPBw"/><span class="font-headline-sm text-headline-sm tracking-tight text-primary-container font-bold">JATS v1.1</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container-low px-space-sm py-space-xs rounded-full shadow-[0_0_0_1px_rgba(217,119,6,0.35)]"><span class="material-symbols-outlined text-secondary text-[16px]">store</span><span class="font-label-sm text-label-sm text-secondary font-medium">All 3 Branches (Main, Downtown, West Mall)</span><span class="material-symbols-outlined text-secondary text-[16px]">arrow_drop_down</span></div><div class="hidden 2xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-high"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">SysAd Mode (3-Tier RBAC)</span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex flex-col text-right pr-space-sm"><div class="font-data-mono text-data-mono text-on-surface font-semibold flex items-center justify-end gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary">schedule</span><span>08:42:15 PST</span></div><span class="font-label-sm text-label-sm text-on-surface-variant">Philippine Standard Time</span></div><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-low shadow-[0_0_0_1px_rgba(16,185,129,0.3)]"><span class="material-symbols-outlined text-tertiary-container text-[16px]">cloud_done</span><span class="font-label-sm text-label-sm text-tertiary-container font-medium">180 MB / 1 GB</span></div><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary-container"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW9ldEO39TVqAalEIytR0NH5O3W7ZAbHzjed75R8fHahPyfiPuD2FEfdLHB7vyayC8S7gLwx5hmlOQmmXWMuP7qc5oM98nQ1dPB4N2D4gxMkPpZ3d9ff0VuYWaJRMM1m8JGd5f2K0-ZJtU-OwWfGgRfezB6QGyCyraIl7kSfpBwmkkjIGD7rVGao1OapOz4guTqCGa_BqVy4MALwa34lCSM3OYr8mFerpvlu33EgOUZCAA8ENtPkYZ"/><div class="hidden sm:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight font-semibold">Elena Vance</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">SysAd - Jaytees Group</span></div></div></div></div></header><main class="w-full pt-16 bg-surface px-space-lg pb-space-xl"><div class="flex flex-col w-full">
+<!-- Top Stats Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md mb-space-lg">
+<!-- Stat 1: Total Headcount -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1 bg-primary-container"></div>
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Total Headcount</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container">groups</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-headline-xl text-on-surface">98</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">/ 100 Active</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>M: 42</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>DT: 31</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>WM: 25</span>
+</div>
+</div>
+<!-- Stat 2: On-Duty Now -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1 bg-secondary-container"></div>
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider">On-Duty Now</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">timer</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-headline-xl text-on-surface">84</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">Clocked In</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1 rounded-full w-fit">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-tertiary-container font-medium">Floor Staff Live</span>
+</div>
+</div>
+<!-- Stat 3: Punctual Rate -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1 bg-secondary"></div>
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Punctual Rate</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">verified</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-headline-xl text-secondary">94.2%</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">trending_up</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-center gap-space-xs">
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-[94.2%]"></div>
+</div>
+<span class="font-data-mono text-label-sm text-on-surface-variant">+1.8%</span>
+</div>
+</div>
+<!-- Stat 4: Mode C Field Staff -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1 bg-primary-container"></div>
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Mode C Field Auth</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container">local_shipping</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-headline-xl text-on-surface">6</span>
+<span class="font-label-md text-label-md text-primary-container font-semibold">Off-Site Staff</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="text-secondary font-medium">4 Errand / 2 Field</span>
+<span class="bg-surface-container px-space-xs py-0.5 rounded text-[10px] font-data-mono">LIVE GPS</span>
+</div>
+</div>
+<!-- Stat 5: Cloud Storage & Purge -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 left-0 right-0 h-1 bg-tertiary-container"></div>
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Free-Tier Storage</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary-container">cloud_sync</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-headline-xl text-on-surface">184</span>
+<span class="font-label-md text-label-md text-on-surface-variant">/ 1,000 MB</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full w-[18.4%]"></div>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="font-label-sm text-[10px] text-on-surface-variant">18.4% used</span>
+<span class="font-label-sm text-[10px] text-tertiary font-medium">60-day Auto-Purge</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Operational Grid (70% Stream / 30% Health Radar & Sidecar) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT 70% SECTION: Live Attendance Feed -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- Control & Filter Bar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-md">
+<!-- Search & Quick Filters -->
+<div class="flex flex-wrap items-center gap-space-sm flex-1">
+<div class="relative min-w-[220px] flex-1">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full h-11 pl-9 pr-3 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest shadow-sm placeholder:text-on-surface-variant" placeholder="Search employee, ID, branch..." type="text"/>
+</div>
+<!-- Branch Filter Tabs -->
+<div class="flex items-center bg-surface-container-low p-1 rounded-lg">
+<button class="px-space-sm py-1.5 rounded bg-primary-container text-on-primary font-label-sm text-label-sm shadow-sm transition-all">All</button>
+<button class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all">Main</button>
+<button class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all">Downtown</button>
+<button class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all">West Mall</button>
+</div>
+</div>
+<!-- Shift & Status Filter Selectors -->
+<div class="flex items-center gap-space-xs">
+<div class="bg-surface-container-low px-space-sm py-2 rounded-lg flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<select class="bg-transparent text-on-surface font-label-sm text-label-sm focus:outline-none cursor-pointer">
+<option>All Shifts</option>
+<option>Opening (07:00 - 15:30)</option>
+<option>Mid (11:00 - 19:30)</option>
+<option>Closing (14:30 - 23:00)</option>
+</select>
+</div>
+<button class="h-11 px-space-md bg-surface-container-low text-on-surface-variant hover:text-on-surface rounded-lg flex items-center gap-1 font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Filters</span>
+</button>
+</div>
+</div>
+<!-- Live Stream Subheader with Legend -->
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-primary-container animate-ping"></div>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Real-Time Verification Stream</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-data-mono text-[11px] px-space-xs py-0.5 rounded-full font-bold">12 punches/min</span>
+</div>
+<div class="flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span>In-Geofence</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Mode C Approved</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>Pending Flag</span>
+</div>
+</div>
+</div>
+<!-- Attendance Cards Feed -->
+<div class="flex flex-col gap-space-sm">
+<!-- Card 1: Main Branch In-Geofence Opening Check-In -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-tertiary-container"></div>
+<div class="flex items-center gap-space-md pl-space-xs">
+<!-- Selfie Verification Thumbnail with Status Halo -->
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-xl object-cover shadow-sm bg-surface-container" data-alt="Clear operational selfie photo of an Asian male barista wearing a clean maroon apron smiling indoors in morning retail counter lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2vqX2j3AMauprhPv42sfB4A5WuFlsvGOxO-vKyDBj6v6W7gi8Ka05erA3Y0MliuPEmD0Mh5QjIK_AAAqOwnt5hehmjBYShT3z6jQODBXCLsIcdlKmdcTnzIOz_YrcrWD4bZiv2g1vTRTXvYUf7_V6kZF0qSjjFh_VFeeQQPzPodql6kGb5dlvnun9158lQ9-ldrv73qbKfxCBgF_SSLlD8WInFT5SNREF25Ypee--XyWEdak-gCo-"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[13px]">done</span>
+</div>
+</div>
+<!-- Employee Meta -->
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Mark Jason Alcantara</span>
+<span class="bg-surface-container-high text-on-surface font-data-mono text-[11px] px-1.5 py-0.5 rounded">ID-4109</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">Main Store</span>
+</div>
+<div class="flex items-center gap-space-md mt-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-tertiary font-semibold">
+<span class="material-symbols-outlined text-[16px]">login</span> Time-In: 08:31:04 AM
+                </span>
+<span class="text-on-surface-variant">• Shift: Opening (08:30 - 17:00)</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-2 py-0.5 rounded-full font-medium">On-Time</span>
+</div>
+</div>
+</div>
+<!-- Mode C & Actions -->
+<div class="flex items-center justify-between md:justify-end gap-space-md pt-space-xs md:pt-0">
+<div class="flex flex-col md:items-end">
+<div class="flex items-center gap-1 bg-surface-container-low px-space-sm py-1 rounded-full text-tertiary">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">verified_user</span>
+<span class="font-label-sm text-label-sm font-semibold">In-Geofence Verified</span>
+</div>
+<span class="font-data-mono text-label-sm text-on-surface-variant mt-0.5">Acc: 4.8m • 14.5547°N, 121.0244°E</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="w-10 h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center justify-center transition-colors" title="Inspect Selfie High-Res">
+<span class="material-symbols-outlined text-[20px]">zoom_in</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-primary-container hover:bg-error-container flex items-center justify-center transition-colors" title="Flag Discrepancy">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Mode C Errand / Off-Site Authorized Check-Out -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary-container"></div>
+<div class="flex items-center gap-space-md pl-space-xs">
+<!-- Selfie Verification Thumbnail with Status Halo -->
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-xl object-cover shadow-sm bg-surface-container" data-alt="Portrait verification selfie of a Filipina supervisor inside a bank branch lobby with ambient natural light holding an official logistics folder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAok1f3amsniWxWxXfZw45z4AdOuzxwLCzj5LqrAf-iSX4yWPbx5O47zmCKLlJCCKVyQej5tuFvqSiAWn9IO_sG9IL2JUYNzV32geZEuORz7gk7lCIu6Cmn4Ks8QKviC1ujXLje3wedKVe7mShB2V4Ht6-FRUMYDCfza8GZNw7h0VD2NBnMbR6itElmJcyFdJDaSy1rDr0xBKFkLvfuERy1MJ0MuC_cQWzLyT9ImrJ_TfXYvt5KyPwX"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-secondary-container text-on-secondary-fixed flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[13px]">near_me</span>
+</div>
+</div>
+<!-- Employee Meta -->
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Carla Mae Bautista</span>
+<span class="bg-surface-container-high text-on-surface font-data-mono text-[11px] px-1.5 py-0.5 rounded">ID-2810</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">Downtown Outlet</span>
+</div>
+<div class="flex items-center gap-space-md mt-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[16px]">logout</span> Time-Out: 08:39:12 AM
+                </span>
+<span class="text-on-surface-variant">• Mid-Shift Errand</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm px-2 py-0.5 rounded-full font-medium">BDO Bank Run</span>
+</div>
+</div>
+</div>
+<!-- Mode C & Actions -->
+<div class="flex items-center justify-between md:justify-end gap-space-md pt-space-xs md:pt-0">
+<div class="flex flex-col md:items-end">
+<div class="flex items-center gap-1 bg-secondary-fixed text-on-secondary-fixed px-space-sm py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px] text-secondary">explore</span>
+<span class="font-label-sm text-label-sm font-semibold">Off-Site Approved (Errand)</span>
+</div>
+<span class="font-data-mono text-label-sm text-on-surface-variant mt-0.5">850m from store • Mode C Key: #ERR-803</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="w-10 h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center justify-center transition-colors" title="Inspect Selfie High-Res">
+<span class="material-symbols-outlined text-[20px]">zoom_in</span>
+</button>
+<button class="px-space-sm h-10 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm hover:bg-surface-dim transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>Reviewed</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Flagged Exception - Geofence Discrepancy -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container"></div>
+<div class="flex items-center gap-space-md pl-space-xs">
+<!-- Selfie Verification Thumbnail with Status Halo -->
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-xl object-cover shadow-sm bg-surface-container" data-alt="Portrait verification selfie of a young male store inventory associate in low lighting with warehouse background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOcM3XxsHJvcx1jOEyDQnwWOGeexvJQZkINkAQfw3scDUB33hZJ64M6GawQPVfFba_13hrelor2IUnEynTmoP7yr3TE29yIaM6RbIu1MWtmjXM_zKDkI-OjebWP65-OMGJV5-O2jVxD52OIwt5-VoOMTKgxyqlMw-dlPEl5rPi7lPevmDbvY9sMn6norcLGR2GCWrH4wXWtWfMHar9KFbhB0_MiCYgfrSo0nhsY29EtMliGVjsBOFl"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+</div>
+</div>
+<!-- Employee Meta -->
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Rafael Santos</span>
+<span class="bg-surface-container-high text-on-surface font-data-mono text-[11px] px-1.5 py-0.5 rounded">ID-5219</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">Downtown Outlet</span>
+</div>
+<div class="flex items-center gap-space-md mt-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-primary-container font-semibold">
+<span class="material-symbols-outlined text-[16px]">login</span> Time-In: 08:41:20 AM
+                </span>
+<span class="text-on-surface-variant">• Shift: Opening (08:30)</span>
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-2 py-0.5 rounded-full font-bold">+11m LATE</span>
+</div>
+</div>
+</div>
+<!-- Mode C & Actions -->
+<div class="flex items-center justify-between md:justify-end gap-space-md pt-space-xs md:pt-0">
+<div class="flex flex-col md:items-end">
+<div class="flex items-center gap-1 bg-error-container text-on-error-container px-space-sm py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]">wrong_location</span>
+<span class="font-label-sm text-label-sm font-bold">Outside Geofence (+210m)</span>
+</div>
+<span class="font-data-mono text-label-sm text-primary-container mt-0.5">Cell-Tower Fallback • Unverified PIN</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm h-10 rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm hover:bg-primary transition-colors flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+<span>SysAd Override</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4: West Mall Verified Opening Check-In -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-tertiary-container"></div>
+<div class="flex items-center gap-space-md pl-space-xs">
+<!-- Selfie Verification Thumbnail with Status Halo -->
+<div class="relative shrink-0">
+<img class="w-14 h-14 rounded-xl object-cover shadow-sm bg-surface-container" data-alt="Portrait verification selfie of a cheerful female retail store cashier wearing Jaytees polo shirt standing before West Mall pos terminal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE1TV2UaakpDBNvBFfaCJURaTxpkjDt9WAagmKl31SHJ9sXE5H6LilL_zVmUkZBvm6NiHuY3PuR_H9V9HnPJklx9IsxtaOPYFBIS7fYMQMWNfLllaruMrpCqz1TIo8xPdRZsLDshR85zFH_JV9v_0G6vz_vdX4wOW4Li4DIfvaryvdn3DJB5DAZCkm0kfcLHzx7iP94ggKObAANSEsESS3h0aJ8rVNyePiA6C2wyC8HCfTWZA-7knc"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[13px]">done</span>
+</div>
+</div>
+<!-- Employee Meta -->
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Danica Tolentino</span>
+<span class="bg-surface-container-high text-on-surface font-data-mono text-[11px] px-1.5 py-0.5 rounded">ID-1984</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">West Mall</span>
+</div>
+<div class="flex items-center gap-space-md mt-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-tertiary font-semibold">
+<span class="material-symbols-outlined text-[16px]">login</span> Time-In: 08:24:55 AM
+                </span>
+<span class="text-on-surface-variant">• Shift: Opening (08:30)</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-2 py-0.5 rounded-full font-medium">Early Punch</span>
+</div>
+</div>
+</div>
+<!-- Mode C & Actions -->
+<div class="flex items-center justify-between md:justify-end gap-space-md pt-space-xs md:pt-0">
+<div class="flex flex-col md:items-end">
+<div class="flex items-center gap-1 bg-surface-container-low px-space-sm py-1 rounded-full text-tertiary">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">verified_user</span>
+<span class="font-label-sm text-label-sm font-semibold">In-Geofence Verified</span>
+</div>
+<span class="font-data-mono text-label-sm text-on-surface-variant mt-0.5">Acc: 3.2m • Inside 100m Perimeter</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="w-10 h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center justify-center transition-colors" title="Inspect Selfie High-Res">
+<span class="material-symbols-outlined text-[20px]">zoom_in</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-primary-container hover:bg-error-container flex items-center justify-center transition-colors" title="Flag Discrepancy">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Pagination / Real-time Sync Bar -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-space-md rounded-xl shadow-sm text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-tertiary animate-spin">autorenew</span>
+<span>WebSocket connected • Listening to PostgreSQL replication channel</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high">Previous 20</button>
+<span class="font-data-mono px-space-xs">Page 1 of 8</span>
+<button class="px-space-sm py-1 rounded bg-primary-container text-on-primary hover:bg-primary">Next 20</button>
+</div>
+</div>
+</div>
+<!-- RIGHT 30% SECTION: Health Radar, Mode C Exceptions & Fast Actions -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Branch Health Radar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[20px]">radar</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Branch Health Radar</span>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-data-mono text-[11px] px-2 py-0.5 rounded-full font-bold">ALL ONLINE</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Branch 1: Main Store -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">1. Main Branch (Flagship)</span>
+<span class="bg-tertiary-container text-on-tertiary font-data-mono text-[11px] px-2 py-0.5 rounded">0 Anomalies</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Geofence Radius: <strong class="text-on-surface">150m</strong></span>
+<span class="font-semibold text-tertiary">42 / 44 Present (95%)</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full w-[95%]"></div>
+</div>
+</div>
+<!-- Branch 2: Downtown Outlet -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">2. Downtown Outlet</span>
+<span class="bg-error-container text-on-error-container font-data-mono text-[11px] px-2 py-0.5 rounded font-bold">1 Out-of-Fence</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Geofence Radius: <strong class="text-on-surface">120m</strong></span>
+<span class="font-semibold text-secondary">31 / 32 Present (96%)</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full w-[96%]"></div>
+</div>
+</div>
+<!-- Branch 3: West Mall -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">3. West Mall Branch</span>
+<span class="bg-tertiary-container text-on-tertiary font-data-mono text-[11px] px-2 py-0.5 rounded">Normal</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Geofence Radius: <strong class="text-on-surface">100m</strong></span>
+<span class="font-semibold text-tertiary">25 / 24 Assigned (104%)</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full w-[100%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Mode C Live Exceptions Widget -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">near_me</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Mode C Live Queue</span>
+</div>
+<span class="bg-secondary-container text-on-secondary-fixed font-data-mono text-[11px] px-2 py-0.5 rounded-full font-bold">2 Pending</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+          Errand punches awaiting SysAd geofence verification & dispatch sign-off.
+        </p>
+<!-- Exception Card Item 1 -->
+<div class="p-space-sm bg-surface-container-low rounded-lg mb-space-xs flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Rico Morales (West Mall)</span>
+</div>
+<span class="font-data-mono text-[11px] text-on-surface-variant">08:28 AM</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Supplier Run • SM City Logistics</span>
+<span class="text-secondary font-bold font-data-mono">1.2 km away</span>
+</div>
+<div class="flex items-center gap-space-xs mt-1">
+<button class="flex-1 py-1.5 bg-primary-container text-on-primary rounded font-label-sm text-label-sm hover:bg-primary transition-colors text-center font-semibold">Approve Errand</button>
+<button class="px-space-sm py-1.5 bg-surface-container-high text-on-surface rounded font-label-sm text-label-sm hover:bg-surface-dim transition-colors">Map</button>
+</div>
+</div>
+<!-- Exception Card Item 2 -->
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Leah Salonga (Main Store)</span>
+</div>
+<span class="font-data-mono text-[11px] text-on-surface-variant">08:35 AM</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Barangay Permit Processing</span>
+<span class="text-secondary font-bold font-data-mono">420m away</span>
+</div>
+<div class="flex items-center gap-space-xs mt-1">
+<button class="flex-1 py-1.5 bg-primary-container text-on-primary rounded font-label-sm text-label-sm hover:bg-primary transition-colors text-center font-semibold">Approve Errand</button>
+<button class="px-space-sm py-1.5 bg-surface-container-high text-on-surface rounded font-label-sm text-label-sm hover:bg-surface-dim transition-colors">Map</button>
+</div>
+</div>
+</div>
+<!-- Quick Operational Actions Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface block mb-space-sm">Fast Actions</span>
+<div class="flex flex-col gap-space-xs">
+<!-- Action 1: Export Cutoff CSV -->
+<button class="w-full h-12 bg-primary-container text-on-primary rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-space-sm hover:bg-primary transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+<span>Export Cutoff Summary (CSV)</span>
+</button>
+<!-- Action 2: Launch Kiosk Mode -->
+<button class="w-full h-12 bg-surface-container-high text-on-surface rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-space-sm hover:bg-surface-dim transition-all">
+<span class="material-symbols-outlined text-secondary text-[20px]">desktop_windows</span>
+<span>Launch Punch Station Simulator</span>
+</button>
+<!-- Action 3: Purge Cached Thumbnails -->
+<button class="w-full h-11 bg-surface-container-low text-on-surface-variant rounded-xl font-label-md text-label-md flex items-center justify-center gap-space-sm hover:bg-error-container hover:text-on-error-container transition-all" id="purge-btn">
+<span class="material-symbols-outlined text-[18px]">cleaning_services</span>
+<span>Purge Cached Thumbnails (60+ Days)</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Script for Purge Toast & Fast Filter Mock -->
+<script>
+    document.getElementById('purge-btn')?.addEventListener('click', function() {
+      const originalText = this.innerHTML;
+      this.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Purging 24MB storage...</span>';
+      setTimeout(() => {
+        this.innerHTML = '<span class="material-symbols-outlined text-[18px] text-tertiary">check</span><span>Purged Successfully! (160MB free)</span>';
+        setTimeout(() => {
+          this.innerHTML = originalText;
+        }, 2500);
+      }, 1000);
+    });
+  </script>
+</div></main></div></body></html>

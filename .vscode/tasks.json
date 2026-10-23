@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Jaytees Attendance Dev Server",
+      "type": "shell",
+      "command": "npm.cmd run dev",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "nextjs",
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting...",
+          "endsPattern": "Ready in"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

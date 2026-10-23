@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaytees Employee Attendance & Monitoring App (3 Branches • Mode C)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #020617; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 pb-16">
+  <!-- App Root -->
+  <div id="app"></div>
+
+  <script>
+    // =========================================================================
+    // JAYTEES ATTENDANCE & MONITORING SYSTEM (STANDALONE + LIVE SERVER EDITION)
+    // Supports: 3 Branches, ~100 Staff, Live Camera Watermark, Mode C Geofence
+    // =========================================================================
+
+    const INITIAL_BRANCHES = [
+      { id: "branch-1", name: "Branch 1 — Jaytees Main Store", address: "Downtown Commercial Center, Bldg A", latitude: 14.5995, longitude: 120.9842, radiusMeters: 80, isActive: true },
+      { id: "branch-2", name: "Branch 2 — Jaytees North Plaza", address: "North Avenue Retail Strip, Unit 104", latitude: 14.6560, longitude: 121.0305, radiusMeters: 80, isActive: true },
+      { id: "branch-3", name: "Branch 3 — Jaytees South Town", address: "South Highway Town Center, Ground Floor", latitude: 14.4296, longitude: 121.0419, radiusMeters: 85, isActive: true }
+    ];
+
+    const INITIAL_SHIFTS = [
+      { id: "shift-b1-open", branchId: "branch-1", name: "Opening Shift", startTime: "07:00", endTime: "16:00", gracePeriodMins: 10 },
+      { id: "shift-b1-mid",  branchId: "branch-1", name: "Mid Shift",     startTime: "10:00", endTime: "19:00", gracePeriodMins: 10 },
+      { id: "shift-b1-close",branchId: "branch-1", name: "Closing Shift", startTime: "13:00", endTime: "22:00", gracePeriodMins: 10 },
+      { id: "shift-b2-open", branchId: "branch-2", name: "Opening Shift", startTime: "07:30", endTime: "16:30", gracePeriodMins: 10 },
+      { id: "shift-b2-mid",  branchId: "branch-2", name: "Mid Shift",     startTime: "10:30", endTime: "19:30", gracePeriodMins: 10 },
+      { id: "shift-b2-close",branchId: "branch-2", name: "Closing Shift", startTime: "13:30", endTime: "22:30", gracePeriodMins: 10 },
+      { id: "shift-b3-open", branchId: "branch-3", name: "Opening Shift", startTime: "08:00", endTime: "17:00", gracePeriodMins: 10 },
+      { id: "shift-b3-mid",  branchId: "branch-3", name: "Mid Shift",     startTime: "11:00", endTime: "20:00", gracePeriodMins: 10 },
+      { id: "shift-b3-close",branchId: "branch-3", name: "Closing Shift", startTime: "14:00", endTime: "23:00", gracePeriodMins: 10 }
+    ];
+
+    const INITIAL_EMPLOYEES = [
+      { id: "emp-sysad-1", employeeCode: "JT-001", fullName: "Carlos Mendoza (SysAd)", role: "SYSAD", branchId: "branch-1", shiftId: "shift-b1-open", allowOffsiteTimeout: true, allowMultiBranch: true },
+      { id: "emp-admin-1", employeeCode: "JT-002", fullName: "Elena Reyes (Branch 1 Admin)", role: "ADMIN", branchId: "branch-1", shiftId: "shift-b1-open", allowOffsiteTimeout: true, allowMultiBranch: false },
+      { id: "emp-admin-2", employeeCode: "JT-003", fullName: "Marco Villanueva (Branch 2 Admin)", role: "ADMIN", branchId: "branch-2", shiftId: "shift-b2-open", allowOffsiteTimeout: true, allowMultiBranch: false },
+      { id: "emp-admin-3", employeeCode: "JT-004", fullName: "Patricia Lim (Branch 3 Admin)", role: "ADMIN", branchId: "branch-3", shiftId: "shift-b3-open", allowOffsiteTimeout: true, allowMultiBranch: false },
+      { id: "emp-user-101", employeeCode: "JT-101", fullName: "Roberto Cruz (Senior Cashier)", role: "USER", branchId: "branch-1", shiftId: "shift-b1-open", allowOffsiteTimeout: false, allowMultiBranch: false },
+      { id: "emp-user-102", employeeCode: "JT-102", fullName: "Dante Bautista (Delivery & Errand)", role: "USER", branchId: "branch-1", shiftId: "shift-b1-mid", allowOffsiteTimeout: true, allowMultiBranch: false },
+      { id: "emp-user-103", employeeCode: "JT-103", fullName: "Teresita Aquino (Inventory Clerk)", role: "USER", branchId: "branch-2", shiftId: "shift-b2-open", allowOffsiteTimeout: false, allowMultiBranch: false },
+      { id: "emp-user-104", employeeCode: "JT-104", fullName: "Noel Fernandez (Supply Purchaser)", role: "USER", branchId: "branch-2", shiftId: "shift-b2-mid", allowOffsiteTimeout: true, allowMultiBranch: true },
+      { id: "emp-user-105", employeeCode: "JT-105", fullName: "Gloria Ramos (Store Associate)", role: "USER", branchId: "branch-3", shiftId: "shift-b3-open", allowOffsiteTimeout: false, allowMultiBranch: false },
+      { id: "emp-user-106", employeeCode: "JT-106", fullName: "Ramon Castillo (Reliever / Floater)", role: "USER", branchId: "branch-3", shiftId: "shift-b3-close", allowOffsiteTimeout: true, allowMultiBranch: true }
+    ];
+
+    function createSampleSelfieSvg(name, code, action, branchName, distM, timeStr, hue) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360">
+        <rect width="480" height="360" fill="hsl(${hue}, 40%, 20%)" />
+        <circle cx="240" cy="125" r="46" fill="hsl(${hue}, 45%, 65%)" />
+        <path d="M155 265 C155 200 325 200 325 265 Z" fill="hsl(${hue}, 45%, 65%)" />
+        <rect x="14" y="14" width="175" height="28" rx="6" fill="rgba(16, 185, 129, 0.9)" />
+        <text x="24" y="32" fill="#fff" font-family="sans-serif" font-size="12" font-weight="bold">● LIVE SELFIE VERIFIED</text>
+        <rect x="0" y="268" width="480" height="92" fill="rgba(15, 23, 42, 0.92)" />
+        <text x="16" y="292" fill="#38bdf8" font-family="monospace" font-size="14" font-weight="bold">${action} • ${code} • ${name}</text>
+        <text x="16" y="316" fill="#f8fafc" font-family="monospace" font-size="13">${branchName}</text>
+        <text x="16" y="340" fill="#94a3b8" font-family="monospace" font-size="12">${timeStr} • Distance: ${distM}m from store</text>
+      </svg>`;
+      return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+    }
+
+    const todayKey = new Date().toISOString().slice(0, 10);
+
+    const INITIAL_LOGS = [
+      {
+        id: "log-1", employeeId: "emp-user-101", employeeCode: "JT-101", employeeName: "Roberto Cruz (Senior Cashier)",
+        branchId: "branch-1", branchName: "Branch 1 — Jaytees Main Store", shiftName: "Opening Shift", shiftStart: "07:00", shiftEnd: "16:00",
+        dateKey: todayKey, timeInAt: new Date(new Date().setHours(6, 55, 0)).toISOString(), timeInDistanceM: 15,
+        timeInPhotoData: createSampleSelfieSvg("Roberto Cruz", "JT-101", "TIME IN", "Branch 1 — Jaytees Main Store", 15, "06:55 AM", 200),
+        lateMinutes: 0, isOffsiteTimeout: false, undertimeMinutes: 0, totalHours: 0
+      },
+      {
+        id: "log-2", employeeId: "emp-user-102", employeeCode: "JT-102", employeeName: "Dante Bautista (Delivery & Errand)",
+        branchId: "branch-1", branchName: "Branch 1 — Jaytees Main Store", shiftName: "Mid Shift", shiftStart: "10:00", shiftEnd: "19:00",
+        dateKey: todayKey, timeInAt: new Date(new Date().setHours(9, 58, 0)).toISOString(), timeInDistanceM: 19,
+        timeInPhotoData: createSampleSelfieSvg("Dante Bautista", "JT-102", "TIME IN", "Branch 1 — Jaytees Main Store", 19, "09:58 AM", 155),
+        lateMinutes: 0, timeOutAt: new Date(new Date().setHours(18, 45, 0)).toISOString(), timeOutDistanceM: 2360,
+        timeOutPhotoData: createSampleSelfieSvg("Dante Bautista", "JT-102", "TIME OUT", "Off-Site (Mode C Authorized)", 2360, "06:45 PM", 35),
+        isOffsiteTimeout: true, offsiteNote: "Completed client delivery at warehouse", undertimeMinutes: 15, totalHours: 8.78
+      }
+    ];
+
+    // State
+    let state = {
+      branches: JSON.parse(localStorage.getItem("jt_branches") || "null") || INITIAL_BRANCHES,
+      shifts: JSON.parse(localStorage.getItem("jt_shifts") || "null") || INITIAL_SHIFTS,
+      employees: JSON.parse(localStorage.getItem("jt_employees") || "null") || INITIAL_EMPLOYEES,
+      logs: JSON.parse(localStorage.getItem("jt_logs") || "null") || INITIAL_LOGS,
+      currentUserId: "emp-user-101",
+      activeView: "terminal", // 'terminal' | 'admin' | 'sysad'
+      adminSubTab: "timecards", // 'timecards' | 'employees' | 'shifts'
+      adminBranchFilter: "ALL",
+      gps: { latitude: 14.5996, longitude: 120.9843, label: "Inside Branch 1 (Main Store)" },
+      feedback: null,
+      offsiteNote: "",
+      cameraReady: false
+    };
+
+    function saveState() {
+      localStorage.setItem("jt_branches", JSON.stringify(state.branches));
+      localStorage.setItem("jt_shifts", JSON.stringify(state.shifts));
+      localStorage.setItem("jt_employees", JSON.stringify(state.employees));
+      localStorage.setItem("jt_logs", JSON.stringify(state.logs));
+    }
+
+    // Haversine Distance in Meters
+    function calcDistanceM(lat1, lng1, lat2, lng2) {
+      const R = 6371000;
+      const toRad = (d) => (d * Math.PI) / 180;
+      const dLat = toRad(lat2 - lat1);
+      const dLng = toRad(lng2 - lng1);
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+      return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+    }
+
+    function evaluateVicinity(user) {
+      let targetBranch = state.branches.find(b => b.id === user.branchId) || state.branches[0];
+      let distanceMeters = calcDistanceM(state.gps.latitude, state.gps.longitude, targetBranch.latitude, targetBranch.longitude);
+
+      if (user.allowMultiBranch || user.role === "SYSAD") {
+        for (const b of state.branches) {
+          const d = calcDistanceM(state.gps.latitude, state.gps.longitude, b.latitude, b.longitude);
+          if (d < distanceMeters) { distanceMeters = d; targetBranch = b; }
+        }
+      }
+
+      const isInsideVicinity = distanceMeters <= targetBranch.radiusMeters;
+      const canTimeIn = isInsideVicinity;
+      const canTimeOut = isInsideVicinity || user.allowOffsiteTimeout;
+
+      return { targetBranch, distanceMeters, allowedRadius: targetBranch.radiusMeters, isInsideVicinity, canTimeIn, canTimeOut };
+    }
+
+    // Start Webcam
+    let mediaStream = null;
+    async function initCamera() {
+      const videoEl = document.getElementById("live-video");
+      const fallbackEl = document.getElementById("camera-fallback");
+      if (!videoEl) return;
+      try {
+        if (!mediaStream && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: 640, height: 480 }, audio: false });
+        }
+        if (mediaStream) {
+          videoEl.srcObject = mediaStream;
+          videoEl.classList.remove("hidden");
+          if (fallbackEl) fallbackEl.classList.add("hidden");
+        }
+      } catch (e) {
+        videoEl.classList.add("hidden");
+        if (fallbackEl) fallbackEl.classList.remove("hidden");
+      }
+    }
+
+    function captureSelfieDataUrl(actionLabel, user, branchName, distM) {
+      const canvas = document.createElement("canvas");
+      canvas.width = 480;
+      canvas.height = 360;
+      const ctx = canvas.getContext("2d");
+      const videoEl = document.getElementById("live-video");
+
+      if (videoEl && videoEl.srcObject && videoEl.readyState >= 2) {
+        ctx.save();
+        ctx.translate(480, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(videoEl, 0, 0, 480, 360);
+        ctx.restore();
+      } else {
+        ctx.fillStyle = "#0f172a";
+        ctx.fillRect(0, 0, 480, 360);
+        ctx.fillStyle = "#38bdf8";
+        ctx.beginPath(); ctx.arc(240, 120, 44, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(240, 255, 85, Math.PI, 0, false); ctx.fill();
+      }
+
+      ctx.fillStyle = "rgba(16, 185, 129, 0.92)";
+      ctx.fillRect(14, 14, 190, 28);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 12px sans-serif";
+      ctx.fillText("● LIVE SELFIE VERIFIED", 24, 32);
+
+      ctx.fillStyle = "rgba(15, 23, 42, 0.92)";
+      ctx.fillRect(0, 268, 480, 92);
+      ctx.fillStyle = actionLabel === "TIME IN" ? "#34d399" : "#38bdf8";
+      ctx.font = "bold 14px monospace";
+      ctx.fillText(`${actionLabel} • ${user.employeeCode} • ${user.fullName}`, 14, 294);
+      ctx.fillStyle = "#f8fafc";
+      ctx.font = "13px monospace";
+      ctx.fillText(branchName, 14, 318);
+      ctx.fillStyle = "#cbd5e1";
+      ctx.font = "11px monospace";
+      ctx.fillText(`${new Date().toLocaleString()} | GPS Distance: ${distM}m`, 14, 342);
+
+      return canvas.toDataURL("image/webp", 0.68);
+    }
+
+    // Actions
+    window.switchUser = function(empId) {
+      state.currentUserId = empId;
+      state.feedback = null;
+      const u = state.employees.find(e => e.id === empId);
+      if (u.role === "USER") state.activeView = "terminal";
+      else if (u.role === "ADMIN") { state.activeView = "admin"; state.adminBranchFilter = u.branchId; }
+      else if (u.role === "SYSAD") { state.activeView = "sysad"; state.adminBranchFilter = "ALL"; }
+      render();
+    };
+
+    window.switchView = function(view) {
+      state.activeView = view;
+      state.feedback = null;
+      render();
+    };
+
+    window.setGpsBranch = function(branchId) {
+      const b = state.branches.find(x => x.id === branchId);
+      if (!b) return;
+      state.gps = { latitude: +(b.latitude + 0.0001).toFixed(5), longitude: +(b.longitude + 0.0001).toFixed(5), label: `Inside ${b.name}` };
+      state.feedback = null;
+      render();
+    };
+
+    window.setGpsOutside = function() {
+      const u = state.employees.find(e => e.id === state.currentUserId) || state.employees[0];
+      const b = state.branches.find(x => x.id === u.branchId) || state.branches[0];
+      state.gps = { latitude: +(b.latitude + 0.0125).toFixed(5), longitude: +(b.longitude + 0.0085).toFixed(5), label: "Outside Store Vicinity (~1.5 km away)" };
+      state.feedback = null;
+      render();
+    };
+
+    window.useRealGps = function() {
+      if (!navigator.geolocation) { alert("Geolocation not supported"); return; }
+      navigator.geolocation.getCurrentPosition(pos => {
+        state.gps = { latitude: +pos.coords.latitude.toFixed(5), longitude: +pos.coords.longitude.toFixed(5), label: "Real Device GPS Active" };
+        render();
+      }, err => alert("Could not get real GPS: " + err.message), { enableHighAccuracy: true });
+    };
+
+    window.handleTimeIn = function() {
+      const user = state.employees.find(e => e.id === state.currentUserId);
+      const vic = evaluateVicinity(user);
+      if (!vic.canTimeIn) {
+        state.feedback = { type: "error", title: "Time In Blocked", msg: `You are ${vic.distanceMeters}m away. Must be within ${vic.allowedRadius}m of ${vic.targetBranch.name}.` };
+        render(); return;
+      }
+      const shift = state.shifts.find(s => s.id === user.shiftId) || state.shifts[0];
+      const photo = captureSelfieDataUrl("TIME IN", user, vic.targetBranch.name, vic.distanceMeters);
+      const newLog = {
+        id: "log-" + Date.now(), employeeId: user.id, employeeCode: user.employeeCode, employeeName: user.fullName,
+        branchId: vic.targetBranch.id, branchName: vic.targetBranch.name, shiftName: shift.name, shiftStart: shift.startTime, shiftEnd: shift.endTime,
+        dateKey: todayKey, timeInAt: new Date().toISOString(), timeInDistanceM: vic.distanceMeters, timeInPhotoData: photo,
+        lateMinutes: 0, isOffsiteTimeout: false, undertimeMinutes: 0, totalHours: 0
+      };
+      state.logs.unshift(newLog);
+      saveState();
+      state.feedback = { type: "success", title: "TIME IN RECORDED!", msg: `Verified inside ${vic.targetBranch.name} (${vic.distanceMeters}m away).` };
+      render();
+    };
+
+    window.handleTimeOut = function() {
+      const user = state.employees.find(e => e.id === state.currentUserId);
+      const vic = evaluateVicinity(user);
+      const todayLog = state.logs.find(l => l.employeeId === user.id && l.dateKey === todayKey);
+      if (!todayLog) return;
+      if (!vic.canTimeOut) {
+        state.feedback = { type: "error", title: "Time Out Blocked (Mode C Policy)", msg: `Standard store staff must be within ${vic.allowedRadius}m of ${vic.targetBranch.name} to Time Out.` };
+        render(); return;
+      }
+      const noteInput = document.getElementById("offsite-note-input");
+      const noteVal = noteInput ? noteInput.value.trim() : "";
+      const photo = captureSelfieDataUrl("TIME OUT", user, vic.isInsideVicinity ? vic.targetBranch.name : `Off-Site (${vic.distanceMeters}m)`, vic.distanceMeters);
+
+      todayLog.timeOutAt = new Date().toISOString();
+      todayLog.timeOutDistanceM = vic.distanceMeters;
+      todayLog.timeOutPhotoData = photo;
+      todayLog.isOffsiteTimeout = !vic.isInsideVicinity;
+      todayLog.offsiteNote = !vic.isInsideVicinity ? (noteVal || "Authorized Mode C Off-Site Time Out") : "";
+      todayLog.totalHours = Math.max(0.1, +((new Date(todayLog.timeOutAt) - new Date(todayLog.timeInAt)) / 3600000).toFixed(2));
+
+      saveState();
+      state.feedback = { type: "success", title: "TIME OUT RECORDED!", msg: vic.isInsideVicinity ? `Verified in-store Time Out at ${vic.targetBranch.name}.` : `Logged via Mode C Off-Site Authorization (${vic.distanceMeters}m from branch).` };
+      render();
+    };
+
+    window.toggleModeC = function(empId) {
+      const emp = state.employees.find(e => e.id === empId);
+      if (emp) { emp.allowOffsiteTimeout = !emp.allowOffsiteTimeout; saveState(); render(); }
+    };
+
+    window.updateBranchRadius = function(branchId, val) {
+      const b = state.branches.find(x => x.id === branchId);
+      if (b) { b.radiusMeters = Number(val); saveState(); render(); }
+    };
+
+    window.populate100Staff = function() {
+      let count = state.employees.length + 101;
+      while (state.employees.length < 100) {
+        const idx = state.employees.length;
+        const b = state.branches[idx % 3];
+        const s = state.shifts.find(x => x.branchId === b.id) || state.shifts[0];
+        state.employees.push({
+          id: "emp-gen-" + count, employeeCode: "JT-" + count, fullName: `Staff Member #${idx + 1} (${idx % 4 === 0 ? "Delivery/Errand" : "Store Staff"})`,
+          role: "USER", branchId: b.id, shiftId: s.id, allowOffsiteTimeout: idx % 4 === 0, allowMultiBranch: false
+        });
+        count++;
+      }
+      saveState(); render();
+    };
+
+    window.exportPayrollCsv = function() {
+      const headers = ["Date","Employee Code","Name","Branch","Shift","Time In","Time In Dist(m)","Time Out","Time Out Dist(m)","Mode C Offsite","Note","Total Hours"];
+      const rows = state.logs.map(l => [
+        l.dateKey, l.employeeCode, `"${l.employeeName}"`, `"${l.branchName}"`, `"${l.shiftName}"`,
+        new Date(l.timeInAt).toLocaleTimeString(), l.timeInDistanceM,
+        l.timeOutAt ? new Date(l.timeOutAt).toLocaleTimeString() : "ACTIVE", l.timeOutDistanceM || "",
+        l.isOffsiteTimeout ? "YES (MODE C)" : "NO", `"${l.offsiteNote || ""}"`, l.totalHours
+      ]);
+      const csv = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+      const a = document.createElement("a");
+      a.href = encodeURI(csv);
+      a.download = `jaytees-payroll-${todayKey}.csv`;
+      a.click();
+    };
+
+    function render() {
+      const user = state.employees.find(e => e.id === state.currentUserId) || state.employees[0];
+      const vic = evaluateVicinity(user);
+      const shift = state.shifts.find(s => s.id === user.shiftId) || state.shifts[0];
+      const todayLog = state.logs.find(l => l.employeeId === user.id && l.dateKey === todayKey);
+      const myLogs = state.logs.filter(l => l.employeeId === user.id);
+
+      const appEl = document.getElementById("app");
+      appEl.innerHTML = `
+        <!-- Top Header -->
+        <header class="sticky top-0 z-30 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
+          <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-emerald-500 font-black text-slate-950">JT</div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h1 class="text-lg font-black text-white">JAYTEES ATTENDANCE</h1>
+                  <span class="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-xs font-bold text-emerald-300 border border-emerald-500/30">3 Branches • Mode C</span>
+                </div>
+                <p class="text-xs text-slate-400">Paperless Camera & Geofence Time-Tracking (${state.employees.length} Staff)</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <div class="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-3 py-1.5">
+                <span class="text-xs font-bold text-slate-400">Active User:</span>
+                <select onchange="switchUser(this.value)" class="bg-slate-900 text-xs font-bold text-white focus:outline-none">
+                  ${state.employees.slice(0, 15).map(e => `
+                    <option value="${e.id}" ${e.id === user.id ? "selected" : ""}>
+                      [${e.role}] ${e.employeeCode} • ${e.fullName} ${e.role === 'USER' ? (e.allowOffsiteTimeout ? '(Mode C Off-Site OK)' : '(In-Store Only)') : ''}
+                    </option>
+                  `).join("")}
+                </select>
+              </div>
+
+              <div class="flex items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900 p-1">
+                <a href="stitch-ui/01-live-operations-selfie-feed.html" class="rounded-lg bg-[#991b1b] px-3 py-1.5 text-xs font-bold text-white shadow">✨ Open Stitch Inspo UI (5 Screens)</a>
+                <button onclick="switchView('terminal')" class="rounded-lg px-3 py-1.5 text-xs font-bold ${state.activeView === 'terminal' ? 'bg-emerald-600 text-white' : 'text-slate-300'}">Time In / Out</button>
+                ${user.role !== "USER" ? `<button onclick="switchView('admin')" class="rounded-lg px-3 py-1.5 text-xs font-bold ${state.activeView === 'admin' ? 'bg-sky-600 text-white' : 'text-slate-300'}">Branch Admin</button>` : ""}
+                ${user.role === "SYSAD" ? `<button onclick="switchView('sysad')" class="rounded-lg px-3 py-1.5 text-xs font-bold ${state.activeView === 'sysad' ? 'bg-purple-600 text-white' : 'text-slate-300'}">SysAd Config</button>` : ""}
+              </div>
+            </div>
+          </div>
+
+          <!-- GPS Vicinity Tester Bar -->
+          <div class="border-t border-slate-800 bg-slate-900 px-4 py-2">
+            <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 text-xs">
+              <div>
+                <span class="font-bold text-slate-300">GPS Vicinity Simulator:</span>
+                <span class="ml-2 rounded bg-slate-800 px-2 py-0.5 font-mono text-sky-300">${state.gps.label} (${state.gps.latitude}, ${state.gps.longitude})</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                ${state.branches.map((b, i) => `
+                  <button onclick="setGpsBranch('${b.id}')" class="rounded-lg border border-emerald-500/40 bg-emerald-950/60 px-2.5 py-1 text-[11px] font-bold text-emerald-300 hover:bg-emerald-900">📍 Inside Branch ${i + 1}</button>
+                `).join("")}
+                <button onclick="setGpsOutside()" class="rounded-lg border border-rose-500/40 bg-rose-950/60 px-2.5 py-1 text-[11px] font-bold text-rose-300 hover:bg-rose-900">🚗 Outside Store (1.5km away)</button>
+                <button onclick="useRealGps()" class="rounded-lg border border-sky-500/40 bg-sky-950/60 px-2.5 py-1 text-[11px] font-bold text-sky-300 hover:bg-sky-900">📡 Use Real GPS</button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main class="mx-auto max-w-6xl px-4 pt-6">
+          ${state.activeView === "terminal" ? renderTerminal(user, vic, shift, todayLog, myLogs) : ""}
+          ${state.activeView === "admin" ? renderAdmin(user) : ""}
+          ${state.activeView === "sysad" ? renderSysAd() : ""}
+        </main>
+      `;
+
+      if (state.activeView === "terminal") {
+        initCamera();
+      }
+    }
+
+    function renderTerminal(user, vic, shift, todayLog, myLogs) {
+      const hasTimedIn = Boolean(todayLog);
+      const hasTimedOut = Boolean(todayLog && todayLog.timeOutAt);
+
+      return `
+        <div class="space-y-6">
+          <!-- Senior-Friendly Status Banner -->
+          <div class="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-xl">
+            <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+              <div>
+                <span class="rounded-lg bg-sky-500/20 px-3 py-1 text-xs font-bold text-sky-300">${user.employeeCode}</span>
+                <span class="ml-2 rounded-lg px-3 py-1 text-xs font-bold ${user.allowOffsiteTimeout ? 'bg-amber-500/20 text-amber-300' : 'bg-slate-800 text-slate-300'}">
+                  ${user.allowOffsiteTimeout ? 'Mode C: Off-Site Time Out Authorized' : 'Mode C: Strict In-Store Time Out Only'}
+                </span>
+                <h2 class="mt-2 text-2xl font-extrabold text-white">${user.fullName}</h2>
+                <p class="text-sm text-slate-300">Shift: <strong class="text-sky-300">${shift.name} (${shift.startTime} – ${shift.endTime})</strong></p>
+              </div>
+
+              <div class="rounded-xl border border-slate-700 bg-slate-950 px-5 py-3 text-right">
+                <div class="text-xs font-bold uppercase text-emerald-400">Official Time</div>
+                <div class="font-mono text-2xl font-black text-white">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
+                <div class="text-xs text-slate-400">${todayKey}</div>
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-xl border-2 p-4 ${vic.isInsideVicinity ? 'border-emerald-500/60 bg-emerald-950/40 text-emerald-100' : 'border-rose-500/60 bg-rose-950/40 text-rose-100'}">
+              <div class="text-lg font-extrabold">
+                ${vic.isInsideVicinity ? `🟢 INSIDE VICINITY: ${vic.targetBranch.name} (${vic.distanceMeters}m)` : `🔴 OUTSIDE STORE VICINITY (${vic.distanceMeters}m from ${vic.targetBranch.name})`}
+              </div>
+              <div class="text-xs opacity-90 mt-1">Allowed Branch Radius: ${vic.allowedRadius} meters</div>
+            </div>
+          </div>
+
+          ${state.feedback ? `
+            <div class="rounded-2xl border-2 p-4 ${state.feedback.type === 'success' ? 'border-emerald-500 bg-emerald-950/80 text-emerald-100' : 'border-rose-500 bg-rose-950/80 text-rose-100'}">
+              <div class="font-extrabold text-lg">${state.feedback.title}</div>
+              <div class="text-sm">${state.feedback.msg}</div>
+            </div>
+          ` : ""}
+
+          <!-- Camera & Giant Senior-Friendly Buttons -->
+          <div class="grid gap-6 md:grid-cols-12">
+            <div class="md:col-span-7 overflow-hidden rounded-2xl border-2 border-slate-700 bg-slate-900">
+              <div class="relative aspect-[4/3] w-full bg-slate-950 flex items-center justify-center">
+                <video id="live-video" autoplay playsinline muted class="h-full w-full object-cover scale-x-[-1]"></video>
+                <div id="camera-fallback" class="hidden p-6 text-center">
+                  <div class="text-lg font-bold text-sky-300">📷 Live Selfie Watermark Simulator Ready</div>
+                  <p class="text-xs text-slate-400 mt-1">Stamps Employee ID, Branch, Timestamp & GPS Distance onto your digital time card.</p>
+                </div>
+                <div class="absolute left-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-bold text-white">● LIVE CAMERA ONLY</div>
+              </div>
+            </div>
+
+            <div class="md:col-span-5 flex flex-col justify-between rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-xl">
+              <div class="space-y-4">
+                <h3 class="text-xl font-extrabold text-white">Digital Time Card</h3>
+                <p class="text-sm text-slate-300">Strictly <strong>Time In</strong> and <strong>Time Out</strong> only.</p>
+
+                ${!hasTimedIn ? `
+                  <button onclick="handleTimeIn()" ${!vic.canTimeIn ? "disabled" : ""} class="w-full rounded-2xl border-2 px-6 py-7 text-center font-black shadow-xl transition ${vic.canTimeIn ? 'border-emerald-400 bg-emerald-600 text-white hover:bg-emerald-500 cursor-pointer' : 'border-slate-700 bg-slate-800 text-slate-500 cursor-not-allowed'}">
+                    <div class="text-2xl">TAP TO TIME IN</div>
+                    <div class="text-xs font-normal mt-1">${vic.canTimeIn ? `Inside ${vic.targetBranch.name}` : `Must be within ${vic.allowedRadius}m of store`}</div>
+                  </button>
+                ` : `
+                  <div class="rounded-xl border border-emerald-500/40 bg-emerald-950/30 p-3 text-sm text-emerald-200">
+                    ✓ Timed In Today at ${new Date(todayLog.timeInAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})} (${todayLog.timeInDistanceM}m)
+                  </div>
+                `}
+
+                ${hasTimedIn && !hasTimedOut ? `
+                  ${!vic.isInsideVicinity && user.allowOffsiteTimeout ? `
+                    <div class="rounded-xl border border-amber-500/40 bg-amber-950/40 p-3">
+                      <label class="block text-xs font-bold text-amber-300">Mode C Off-Site Errand/Location Note:</label>
+                      <input id="offsite-note-input" type="text" placeholder="e.g., Finished client delivery" class="mt-1 w-full rounded-lg border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-white" />
+                    </div>
+                  ` : ""}
+                  <button onclick="handleTimeOut()" ${!vic.canTimeOut ? "disabled" : ""} class="w-full rounded-2xl border-2 px-6 py-7 text-center font-black shadow-xl transition ${!vic.canTimeOut ? 'border-slate-700 bg-slate-800 text-slate-500 cursor-not-allowed' : vic.isInsideVicinity ? 'border-sky-400 bg-sky-600 text-white hover:bg-sky-500 cursor-pointer' : 'border-amber-400 bg-amber-600 text-white hover:bg-amber-500 cursor-pointer'}">
+                    <div class="text-2xl">TAP TO TIME OUT</div>
+                    <div class="text-xs font-normal mt-1">${!vic.canTimeOut ? `Blocked: Return to store vicinity` : vic.isInsideVicinity ? `In-Store Verified Time Out` : `Mode C Authorized Off-Site Time Out`}</div>
+                  </button>
+                ` : ""}
+
+                ${hasTimedIn && hasTimedOut ? `
+                  <div class="rounded-xl border border-sky-500/40 bg-sky-950/30 p-4 text-center">
+                    <div class="font-extrabold text-white">Shift Completed Today</div>
+                    <div class="text-xs text-slate-300 mt-1">Total Worked: <strong class="text-sky-300">${todayLog.totalHours} hrs</strong></div>
+                  </div>
+                ` : ""}
+              </div>
+
+              <div class="mt-4 rounded-xl bg-slate-950 p-3 text-xs text-slate-400 border border-slate-800">
+                Replaces physical paper time cards across all 3 Jaytees branches.
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal Logs -->
+          <div class="rounded-2xl border border-slate-700 bg-slate-900 p-6">
+            <h3 class="text-lg font-extrabold text-white">My Digital Time Cards (${myLogs.length})</h3>
+            <div class="mt-4 space-y-4">
+              ${myLogs.map(l => `
+                <div class="grid gap-4 rounded-xl border border-slate-700 bg-slate-950 p-4 sm:grid-cols-12">
+                  <div class="sm:col-span-5 space-y-1 text-xs">
+                    <div class="font-mono font-bold text-sky-300">${l.dateKey} • ${l.shiftName}</div>
+                    <div class="text-sm font-bold text-white">${l.branchName}</div>
+                    <div><strong class="text-emerald-400">Time In:</strong> ${new Date(l.timeInAt).toLocaleTimeString()} (${l.timeInDistanceM}m)</div>
+                    <div><strong class="text-sky-400">Time Out:</strong> ${l.timeOutAt ? `${new Date(l.timeOutAt).toLocaleTimeString()} (${l.timeOutDistanceM}m)` : 'Active Shift'}</div>
+                    ${l.isOffsiteTimeout ? `<div class="text-amber-300 font-bold">Mode C Off-Site: ${l.offsiteNote}</div>` : ""}
+                  </div>
+                  <div class="sm:col-span-7 grid grid-cols-2 gap-3">
+                    <img src="${l.timeInPhotoData}" class="h-28 w-full rounded-lg border border-slate-700 object-cover" />
+                    ${l.timeOutPhotoData ? `<img src="${l.timeOutPhotoData}" class="h-28 w-full rounded-lg border border-slate-700 object-cover" />` : `<div class="flex h-28 items-center justify-center rounded-lg border border-dashed border-slate-800 text-xs text-slate-500">Awaiting Time Out</div>`}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAdmin(user) {
+      const isSysAd = user.role === "SYSAD";
+      const logs = state.logs.filter(l => isSysAd ? true : l.branchId === user.branchId);
+      const staff = state.employees.filter(e => isSysAd ? true : e.branchId === user.branchId);
+
+      return `
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-700 bg-slate-900 p-5">
+            <div>
+              <h2 class="text-2xl font-extrabold text-white">${isSysAd ? "All 3 Branches — Admin Monitor" : state.branches.find(b => b.id === user.branchId)?.name}</h2>
+              <p class="text-xs text-slate-400">Inspect Time-In/Out camera selfies, toggle Mode C Off-Site permissions, and export payroll CSV.</p>
+            </div>
+            <button onclick="exportPayrollCsv()" class="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-emerald-500">⬇ Export Payroll CSV</button>
+          </div>
+
+          <!-- Staff Mode C Toggles -->
+          <div class="rounded-2xl border border-slate-700 bg-slate-900 p-5">
+            <h3 class="text-lg font-extrabold text-white mb-3">Branch Staff & Mode C Off-Site Time-Out Permissions (${staff.length})</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="border-b border-slate-800 bg-slate-950 text-slate-400 uppercase">
+                  <tr>
+                    <th class="p-3">Employee</th>
+                    <th class="p-3">Role</th>
+                    <th class="p-3">Branch</th>
+                    <th class="p-3">Mode C Time-Out Policy (Click to Toggle)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800">
+                  ${staff.slice(0, 25).map(e => `
+                    <tr>
+                      <td class="p-3 font-bold text-white">${e.employeeCode} • ${e.fullName}</td>
+                      <td class="p-3">${e.role}</td>
+                      <td class="p-3 text-slate-300">${state.branches.find(b => b.id === e.branchId)?.name}</td>
+                      <td class="p-3">
+                        <button onclick="toggleModeC('${e.id}')" class="rounded-lg px-3 py-1 font-bold ${e.allowOffsiteTimeout ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-slate-800 text-slate-300'}">
+                          ${e.allowOffsiteTimeout ? '✓ Allowed Off-Site Time Out (Mode C)' : 'Strict In-Store Only'}
+                        </button>
+                      </td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Digital Time Card Selfie Feed -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-extrabold text-white">Verified Digital Time Cards (${logs.length})</h3>
+            ${logs.map(l => `
+              <div class="grid gap-4 rounded-2xl border border-slate-700 bg-slate-900 p-5 sm:grid-cols-12">
+                <div class="sm:col-span-5 space-y-1 text-xs">
+                  <span class="rounded bg-sky-500/20 px-2 py-0.5 font-mono font-bold text-sky-300">${l.employeeCode}</span>
+                  <h4 class="text-base font-extrabold text-white pt-1">${l.employeeName}</h4>
+                  <div class="text-slate-400">${l.branchName} • ${l.shiftName}</div>
+                  <div class="pt-2"><strong class="text-emerald-400">Time In:</strong> ${new Date(l.timeInAt).toLocaleTimeString()} (${l.timeInDistanceM}m)</div>
+                  <div><strong class="text-sky-400">Time Out:</strong> ${l.timeOutAt ? `${new Date(l.timeOutAt).toLocaleTimeString()} (${l.timeOutDistanceM}m)` : 'Active'}</div>
+                  ${l.isOffsiteTimeout ? `<div class="mt-2 rounded bg-amber-950/60 border border-amber-500/40 p-2 text-amber-200"><strong>Mode C Off-Site Note:</strong> ${l.offsiteNote}</div>` : ""}
+                </div>
+                <div class="sm:col-span-7 grid grid-cols-2 gap-3">
+                  <img src="${l.timeInPhotoData}" class="h-36 w-full rounded-xl border border-slate-700 object-cover" />
+                  ${l.timeOutPhotoData ? `<img src="${l.timeOutPhotoData}" class="h-36 w-full rounded-xl border border-slate-700 object-cover" />` : `<div class="flex h-36 items-center justify-center rounded-xl border border-dashed border-slate-800 text-xs text-slate-500">Currently On Shift</div>`}
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSysAd() {
+      return `
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-purple-500/40 bg-slate-900 p-5">
+            <div>
+              <h2 class="text-2xl font-extrabold text-white">Level 1: System Admin (SysAd) — 3-Branch Geofence Configurator</h2>
+              <p class="text-xs text-slate-400">Adjust branch GPS radius and test 100-employee capacity on the $0 Free Tier.</p>
+            </div>
+            <button onclick="populate100Staff()" class="rounded-xl bg-purple-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-purple-500">+ Populate Full 100-Employee Roster</button>
+          </div>
+
+          <div class="grid gap-5 md:grid-cols-3">
+            ${state.branches.map((b, idx) => `
+              <div class="rounded-2xl border border-slate-700 bg-slate-900 p-5 space-y-3">
+                <div class="text-xs font-mono font-bold text-sky-400">BRANCH #${idx + 1}</div>
+                <div class="text-lg font-extrabold text-white">${b.name}</div>
+                <div class="text-xs text-slate-400">${b.address}</div>
+                <div class="text-xs font-mono text-slate-300">GPS: ${b.latitude}, ${b.longitude}</div>
+                <div class="pt-2">
+                  <div class="flex justify-between text-xs font-bold">
+                    <span>Geofence Radius:</span>
+                    <span class="text-emerald-400">${b.radiusMeters} meters</span>
+                  </div>
+                  <input type="range" min="30" max="250" step="5" value="${b.radiusMeters}" onchange="updateBranchRadius('${b.id}', this.value)" class="mt-2 w-full accent-emerald-500" />
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    // Initial render
+    render();
+  </script>
+</body>
+</html>

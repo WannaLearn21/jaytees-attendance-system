@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-fixed-dim":"#ffb4ac","on-background":"#131b2e","on-tertiary-container":"#75d2ab","tertiary":"#00402d","surface-container-low":"#f2f3ff","surface-container":"#eaedff","surface-dim":"#d2d9f4","error-container":"#ffdad6","surface-container-highest":"#dae2fd","on-error-container":"#93000a","on-primary-container":"#ffaaa1","inverse-on-surface":"#eef0ff","surface-container-high":"#e2e7ff","background":"#faf8ff","tertiary-fixed-dim":"#7bd8b1","on-surface-variant":"#59413e","surface-bright":"#faf8ff","secondary-container":"#fe932c","on-secondary-fixed":"#2f1500","secondary-fixed-dim":"#ffb77d","on-primary-fixed-variant":"#8e1214","tertiary-container":"#005a40","on-secondary-fixed-variant":"#6e3900","primary-fixed":"#ffdad6","on-primary-fixed":"#410002","secondary":"#904d00","surface-tint":"#b02d29","surface-variant":"#dae2fd","on-surface":"#131b2e","inverse-surface":"#283044","on-tertiary-fixed-variant":"#00513a","on-tertiary-fixed":"#002115","outline":"#8d706d","on-secondary-container":"#663500","outline-variant":"#e1bfbb","primary-container":"#991b1b","surface":"#faf8ff","primary":"#760009","surface-container-lowest":"#ffffff","secondary-fixed":"#ffdcc3","inverse-primary":"#ffb4ac","on-secondary":"#ffffff","on-error":"#ffffff","on-primary":"#ffffff","tertiary-fixed":"#97f5cc","on-tertiary":"#ffffff","error":"#ba1a1a"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"space-lg":"1.5rem","gutter":"1.5rem","space-xs":"0.25rem","space-md":"1rem","margin":"2rem","gutter-mobile":"1rem","margin-mobile":"1rem","space-xl":"2.5rem","space-sm":"0.5rem"},fontFamily:{"headline-xl":["Plus Jakarta Sans"],"body-lg":["Inter"],"headline-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-md":["Inter"],"body-sm":["Inter"],"headline-xl-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"data-mono":["Inter"],"label-lg":["Inter"],"label-sm":["Inter"],"display-lg":["Plus Jakarta Sans"],"body-md":["Inter"]},fontSize:{"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-xl-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"data-mono":["14px",{"lineHeight":"20px","letterSpacing":"0.05em","fontWeight":"500"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"display-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-low"><div class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></div><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Attendance Engine Core</span></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Operational Navigation</div><nav class="flex flex-col gap-space-xs mt-space-xs" data-active-classes="bg-primary-container text-on-primary font-label-lg shadow-sm"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="dashboard" href="01-live-operations-selfie-feed.html"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-lg text-label-lg">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="branch-geofences-and-mode-c-controls" href="03-branch-geofences-mode-c-controls.html"><span class="material-symbols-outlined text-[20px]">share_location</span><span class="font-label-lg text-label-lg">Branch Geofences & Controls</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="shift-scheduling" href="05-shift-scheduling-grace-periods.html"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-label-lg text-label-lg">Shift Scheduling</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="payroll-csv-and-export-center" href="04-payroll-export-storage-center.html"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-label-lg text-label-lg">Payroll CSV & Export</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="senior-punch-station-simulator" href="02-mobile-punch-station-senior-friendly.html"><span class="material-symbols-outlined text-[20px]">pin_invoke</span><span class="font-label-lg text-label-lg">Punch Station Simulator</span></a></nav></div></div><div class="p-space-md bg-surface-container-low m-space-md rounded-xl"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Supabase Cache</span><span class="font-label-sm text-label-sm text-tertiary-container font-semibold">18% Used</span></div><div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-space-xs overflow-hidden"><div class="bg-tertiary-container h-full w-[18%]"></div></div><div class="flex items-center justify-between mt-space-xs"><span class="font-body-sm text-body-sm text-on-surface-variant">Purge Active</span><span class="font-data-mono text-data-mono text-[11px] text-on-surface-variant">180MB/1GB</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40"><div class="h-16 w-full px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><img alt="Jaytees JATS Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WgTi7Su6t-fPtyPdTTc82maHpoZDxTBCKv8Oaa1Jsz1asN70muzMbxY5qOvteOqxMTiIaDKFGPfLLmRlqjeNrxyuaDdmJH5kJDgxukWy_DzjSDuML1kx86os4hDTCnaTk9wwQ0rxp6K3fS9MjJbNGOO5xsd5O7Ai4QXCDqSDIcsuv41YJmh9fJLScV6rF7Ghzz8AvRuwEHUpqHdGhAtr2HBaT3PMs5P3HMRRskEM_U6Z09icIg0WcDPBw"/><span class="font-headline-sm text-headline-sm tracking-tight text-primary-container font-bold">JATS v1.1</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container-low px-space-sm py-space-xs rounded-full shadow-[0_0_0_1px_rgba(217,119,6,0.35)]"><span class="material-symbols-outlined text-secondary text-[16px]">store</span><span class="font-label-sm text-label-sm text-secondary font-medium">All 3 Branches (Main, Downtown, West Mall)</span><span class="material-symbols-outlined text-secondary text-[16px]">arrow_drop_down</span></div><div class="hidden 2xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-high"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">SysAd Mode (3-Tier RBAC)</span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex flex-col text-right pr-space-sm"><div class="font-data-mono text-data-mono text-on-surface font-semibold flex items-center justify-end gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary">schedule</span><span>08:42:15 PST</span></div><span class="font-label-sm text-label-sm text-on-surface-variant">Philippine Standard Time</span></div><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-low shadow-[0_0_0_1px_rgba(16,185,129,0.3)]"><span class="material-symbols-outlined text-tertiary-container text-[16px]">cloud_done</span><span class="font-label-sm text-label-sm text-tertiary-container font-medium">180 MB / 1 GB</span></div><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary-container"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW9ldEO39TVqAalEIytR0NH5O3W7ZAbHzjed75R8fHahPyfiPuD2FEfdLHB7vyayC8S7gLwx5hmlOQmmXWMuP7qc5oM98nQ1dPB4N2D4gxMkPpZ3d9ff0VuYWaJRMM1m8JGd5f2K0-ZJtU-OwWfGgRfezB6QGyCyraIl7kSfpBwmkkjIGD7rVGao1OapOz4guTqCGa_BqVy4MALwa34lCSM3OYr8mFerpvlu33EgOUZCAA8ENtPkYZ"/><div class="hidden sm:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight font-semibold">Elena Vance</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">SysAd - Jaytees Group</span></div></div></div></div></header><main class="w-full pt-16 bg-surface px-space-lg pb-space-xl"><div class="flex flex-col w-full">
+<div class="relative mb-space-lg">
+<div class="absolute -top-10 -left-10 w-96 h-96 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-0 right-1/4 w-80 h-80 bg-secondary-fixed/40 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative flex flex-col xl:flex-row xl:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">security</span> PRD §1.2 & §2 Enforcement
+          </span>
+<span class="text-on-surface-variant font-data-mono text-body-sm">LAT-LON GEOFENCE ENGINE</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Branch Geofences & Mode C Controls</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-1">
+          Precision GPS boundaries, SSID anchor enforcement, and fine-grained off-site punch permissions with spoof-detection telemetry.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="h-12 px-space-lg rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow-md hover:bg-primary transition-all flex items-center gap-space-xs" id="btn-save-geofence">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Save Boundary Config</span>
+</button>
+<button class="h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-label-lg text-label-lg shadow-sm hover:bg-surface-container-low transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">history_edu</span>
+<span>Audit Log Export</span>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-xl">
+<div class="xl:col-span-8 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-container via-secondary-container to-tertiary-container"></div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md mb-space-md gap-space-sm bg-surface-container-low/40 -mx-space-lg -mt-space-lg px-space-lg pt-space-lg">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[24px]">hub</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Registered Store Enclosures</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Live telemetry from 3 configured Metro Manila retail locations</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span> 3/3 Clusters Active
+            </span>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-space-md" id="branches-container">
+<div class="p-space-md rounded-xl bg-surface-container-low transition-all duration-200 shadow-sm" data-branch="1">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary flex items-center justify-center font-headline-sm text-headline-sm shrink-0">
+                  01
+                </div>
+<div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Jaytees Flagship / Main Store</h3>
+<span class="px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified_user</span> Active Geofence
+                    </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface font-data-mono text-[11px]">
+                      B-ID: JTS-HQ-01
+                    </span>
+</div>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-md mt-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">pin_drop</span>
+<span class="font-data-mono">14.5547° N, 121.0244° E</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">wifi</span>
+                      SSID: <code class="font-data-mono text-on-surface font-medium bg-surface-container px-1 rounded">Jaytees_HQ_5G</code>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">group</span>
+<span class="text-on-surface font-medium">44</span> Staff on Site
+                    </span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="w-full sm:w-44">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Radius</span>
+<span class="font-data-mono text-data-mono text-primary-container font-semibold" id="radius-val-1">150m</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary-container" max="300" min="50" oninput="document.getElementById('radius-val-1').innerText = this.value + 'm'; document.getElementById('map-radius-badge').innerText = this.value + 'm'" type="range" value="150"/>
+</div>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-[16px]">tune</span> Adjust
+                </button>
+</div>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low transition-all duration-200 shadow-sm" data-branch="2">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest text-on-surface flex items-center justify-center font-headline-sm text-headline-sm shrink-0">
+                  02
+                </div>
+<div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Downtown Outlet</h3>
+<span class="px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified_user</span> Active Geofence
+                    </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface font-data-mono text-[11px]">
+                      B-ID: JTS-DT-02
+                    </span>
+</div>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-md mt-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">pin_drop</span>
+<span class="font-data-mono">14.5512° N, 121.0289° E</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">wifi</span>
+                      SSID: <code class="font-data-mono text-on-surface font-medium bg-surface-container px-1 rounded">Jaytees_DT_POS</code>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">group</span>
+<span class="text-on-surface font-medium">32</span> Staff on Site
+                    </span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="w-full sm:w-44">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Radius</span>
+<span class="font-data-mono text-data-mono text-primary-container font-semibold" id="radius-val-2">120m</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary-container" max="300" min="50" oninput="document.getElementById('radius-val-2').innerText = this.value + 'm'" type="range" value="120"/>
+</div>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-[16px]">tune</span> Adjust
+                </button>
+</div>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low transition-all duration-200 shadow-sm" data-branch="3">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest text-on-surface flex items-center justify-center font-headline-sm text-headline-sm shrink-0">
+                  03
+                </div>
+<div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">West Mall Kiosk / Store</h3>
+<span class="px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified_user</span> Active Geofence
+                    </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface font-data-mono text-[11px]">
+                      B-ID: JTS-WM-03
+                    </span>
+</div>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-md mt-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">pin_drop</span>
+<span class="font-data-mono">14.5610° N, 121.0312° E</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">wifi</span>
+                      SSID: <code class="font-data-mono text-on-surface font-medium bg-surface-container px-1 rounded">WestMall_Guest_Secure</code>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">group</span>
+<span class="text-on-surface font-medium">24</span> Staff on Site
+                    </span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="w-full sm:w-44">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Radius</span>
+<span class="font-data-mono text-data-mono text-primary-container font-semibold" id="radius-val-3">100m</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary-container" max="300" min="50" oninput="document.getElementById('radius-val-3').innerText = this.value + 'm'" type="range" value="100"/>
+</div>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1 shrink-0">
+<span class="material-symbols-outlined text-[16px]">tune</span> Adjust
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="xl:col-span-4 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col h-full">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">map</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Live Perimeter Visualizer</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-data-mono text-label-sm font-semibold" id="map-radius-badge">150m</span>
+</div>
+<div class="relative w-full h-64 xl:h-80 rounded-xl overflow-hidden shadow-inner flex items-center justify-center">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-location="Makati City Metro Manila Philippines" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCEcAwq9MzE2D5Cl_bp9vvriYGP29q1HXFG61zUCYpjQcsgPKaIWg8ZaivRMeDy01T2KxsU6uVwjxKYfihXFVk9JUmHIuHV6mPuWEqtidzCNOiOW4ybd6S_QxwFnxyLzlYOQfne0k66B8ofWga9qTRHJFashZfaP61_ADyg1Vj1QejMGzuhTO69xKiTT7T7W2RLiZFyTNO0z07fAgW4R31pykkKg_n0Dk5TUUc5CsKfCIDTYvh8HRFD')"></div>
+<div class="absolute inset-0 bg-on-surface/30 backdrop-blur-[1px]"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="relative flex items-center justify-center">
+<div class="w-40 h-40 rounded-full bg-primary-container/20 animate-ping absolute"></div>
+<div class="w-32 h-32 rounded-full border-2 border-primary-container bg-primary-container/10 flex items-center justify-center shadow-lg">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[28px]">storefront</span>
+</div>
+</div>
+</div>
+<div class="mt-3 px-3 py-1.5 rounded-lg bg-surface-container-lowest/90 backdrop-blur text-center shadow-md">
+<div class="font-label-md text-label-md font-bold text-on-surface">Flagship HQ Primary Ring</div>
+<div class="font-data-mono text-[11px] text-primary-container">14.5547° N, 121.0244° E (±1.8m)</div>
+</div>
+</div>
+<div class="absolute bottom-2 left-2 z-10 bg-surface-container-lowest/90 px-2.5 py-1 rounded-md text-[11px] font-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span> GPS Drift Tolerance: <15m
+          </div>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-container-low rounded-lg">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>RADIAL OVERLAP AUDIT</span>
+<span class="text-tertiary-container font-semibold">Zero Collision</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Minimum safe separation of 1.4km verified between Downtown Outlet and West Mall boundary buffers.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm mb-space-xl relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-secondary-container"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between pb-space-md gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[24px]">policy</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Mode C Permission Matrix</h2>
+<span class="px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm uppercase font-semibold">
+            PRD §1.2 Rule 1
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+          Governs permission to register punch records beyond physical store geofences. Field assignments require verified administrative dispatch.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="px-space-md py-2.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-semibold hover:bg-secondary-fixed-dim transition-colors flex items-center gap-1.5 shadow-sm" id="btn-grant-field">
+<span class="material-symbols-outlined text-[18px]">verified</span> Grant Field Staff Mode C
+        </button>
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold hover:bg-surface-container-highest transition-colors flex items-center gap-1.5" id="btn-reset-strict">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span> Reset All to In-Store Strict
+        </button>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-md my-space-md p-space-sm bg-surface-container-low rounded-xl">
+<div class="flex flex-1 items-center gap-space-sm bg-surface-container-lowest px-space-md py-2 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-transparent border-0 outline-none font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant" id="employee-search" placeholder="Search staff by name, employee code, or role..." type="text"/>
+</div>
+<div class="flex items-center gap-space-sm">
+<select class="h-10 px-space-md rounded-lg bg-surface-container-lowest font-label-md text-label-md text-on-surface shadow-sm border-0 outline-none" id="branch-filter">
+<option value="all">All Branches</option>
+<option value="flagship">Main Flagship HQ</option>
+<option value="downtown">Downtown Outlet</option>
+<option value="westmall">West Mall Kiosk</option>
+</select>
+<select class="h-10 px-space-md rounded-lg bg-surface-container-lowest font-label-md text-label-md text-on-surface shadow-sm border-0 outline-none" id="role-filter">
+<option value="all">All Roles</option>
+<option value="field">Logistics & Field Staff</option>
+<option value="floor">In-Store Staff</option>
+</select>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left" id="matrix-table">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-space-sm px-space-md rounded-l-lg">Employee & Designation</th>
+<th class="py-space-sm px-space-md">Station Branch</th>
+<th class="py-space-sm px-space-md">Geofence Rule Mode</th>
+<th class="py-space-sm px-space-md">Status Badge</th>
+<th class="py-space-sm px-space-md text-right rounded-r-lg">Off-Site Time Out Toggle</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest/60 font-body-md text-body-md" id="employee-rows">
+<tr class="hover:bg-surface-container-low/50 transition-colors" data-branch="flagship" data-employee="marco" data-role="field">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="Portrait of Marco Santos, a male logistics specialist wearing a clean Jaytees polo shirt in a professional retail operations hub" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZXd9Sv2-qRgNxU8nQchUa5WuhhXfDdEWsHEeo_y6HQR3aFmHxd2ptNpooameUHH75qBdT21DpD67AxuLXUONkjrNArjklBzBTmaYrNu8yqqgr0fpw0hCh49xl9jBrbhiumO1tPEi3lT6M0WH_BUe-PGU6Nh87JCkOZCToosso72YhXW4tVHHtbtLpz0vr6U7WQrda9BSrLUm881MYplWjiUFIYkUVmxh_au-Njy3k62SEFLKepe4M"/>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold">Marco Santos</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Field Delivery / Logistics • <span class="font-data-mono">EMP-8821</span></div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface">Main Flagship HQ</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-data-mono text-data-mono text-secondary font-medium">MODE-C (Remote OK)</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold inline-flex items-center gap-1 shadow-sm" id="badge-marco">
+<span class="material-symbols-outlined text-[15px]">electric_bolt</span> Remote Errand Approved
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="toggle-marco" onchange="toggleModeC('marco', this.checked)" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:border-surface-container-highest after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors" data-branch="flagship" data-employee="liza" data-role="floor">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="Portrait of Liza Dela Cruz, a female frontline cashier smiling professionally inside an illuminated store interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_3eYkAtdAtLgZfBANyFwuL1GJ09OePOaft8frPMDqZ1vBDIP4hSzFLrdY3GSs9_eAbtIb7TDzXhZQGRzKn-nEMPU1cqMDgz4oH0fJLDSJCvwJTHExH3DpmmI5g3GaihAD0HszO7jVlDp-vauhnXngWzGr-kCchEc3xnfJXs1yhzh6y9FIwiA6tVOkMKmZTIajtBziAhw3_9vfwdUbnT4M7qXguE7T-koWO9f1vx4iGCaNS5eQIfCJ"/>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold">Liza Dela Cruz</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Store Head Cashier • <span class="font-data-mono">EMP-4319</span></div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface">Main Flagship HQ</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-data-mono text-data-mono text-on-surface-variant">STANDARD (Strict 150m)</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium inline-flex items-center gap-1" id="badge-liza">
+<span class="material-symbols-outlined text-[15px]">store</span> In-Store Enforced
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="toggle-liza" onchange="toggleModeC('liza', this.checked)" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:border-surface-container-highest after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors" data-branch="downtown" data-employee="benigno" data-role="field">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="Portrait of Benigno Ramos, a male inventory runner wearing safety badge in an enterprise logistics supply warehouse" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN8CNsa_taU63QAC-dFqgepCrGiUUFQOI0TsQ32slxU1MjNmefBOFfGlmcBBzGET3BPdTKjfN4Csbov1MRwbl1HGKxpnPqo-GZjlOVprJnRJLtAy0DXE8gdw2Vm1Az23fScKXessfu6ZXjOv9eOOzjsqhPu3dh4U_TIruTP9tYh_WOZafXmkDj1pDu6SsyL1LL4CFMihHD33NaKeQoNq95JHt6tfuTcGudApTmDWOBvgMSnIURjlLZ"/>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold">Benigno Ramos</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Procurement Runner • <span class="font-data-mono">EMP-6502</span></div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface">Downtown Outlet</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-data-mono text-data-mono text-secondary font-medium">MODE-C (Remote OK)</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold inline-flex items-center gap-1 shadow-sm" id="badge-benigno">
+<span class="material-symbols-outlined text-[15px]">electric_bolt</span> Remote Errand Approved
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="toggle-benigno" onchange="toggleModeC('benigno', this.checked)" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:border-surface-container-highest after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors" data-branch="westmall" data-employee="sarah" data-role="floor">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="Portrait of Sarah Jenkins, an experienced floor supervisor standing proudly in an upscale department store showcase" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-ia3JJJ2gTxSOVI13cky3Wr3u8Fu7KUuYlHURp5RJxSRDrCaaaqY23sTTmA3ViBp_i4EfGm8lDNhsbqaVzXJc8SOY2uHJ-HoULxejiEdBFRIAXjo7hIWWwDnssZDFJ6IcpY-cnqsRVtMtkgRSHv_v332J4P_HS52EVCtfyMxaqqBMtn6cImavQLvCInUdvrw8JGp1mK_8a4bXRl8xgaVP3nCpseLB0SiCayQ5z_uzYNSxjvGhjwax"/>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold">Sarah Jenkins</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Floor Supervisor • <span class="font-data-mono">EMP-3104</span></div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface">West Mall Kiosk/Store</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-data-mono text-data-mono text-on-surface-variant">STANDARD (Strict 100m)</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium inline-flex items-center gap-1" id="badge-sarah">
+<span class="material-symbols-outlined text-[15px]">store</span> In-Store Enforced
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="toggle-sarah" onchange="toggleModeC('sarah', this.checked)" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:border-surface-container-highest after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-primary-container"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between pb-space-md mb-space-md gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[26px]">drive_file_rename_outline</span>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Geofence Anomaly & Spoofing Defense Log</h2>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/10 text-primary-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span> Realtime Sentinel
+            </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time mock location checks, GPS accuracy variance (<15m standard), and biometric selfie watermarks</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-data-mono text-body-sm text-on-surface-variant">Auto-Refresh: <strong class="text-on-surface">4s</strong></span>
+<button class="p-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-colors" title="Trigger diagnostic ping">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-lg">
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase">GPS Error Tolerance</div>
+<div class="font-display-lg text-headline-xl text-primary font-bold mt-1">±11.4m</div>
+<div class="font-body-sm text-body-sm text-tertiary-container flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> PRD Target: <15.0m
+          </div>
+</div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-container/10 text-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">satellite_alt</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase">Mock Location Flagged</div>
+<div class="font-display-lg text-headline-xl text-primary-container font-bold mt-1">1 Intercepted</div>
+<div class="font-body-sm text-body-sm text-primary-container flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">warning</span> Mock App Provider Blocked
+          </div>
+</div>
+<div class="w-12 h-12 rounded-xl bg-primary-container/10 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">fmd_bad</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase">Selfie Integrity Check</div>
+<div class="font-display-lg text-headline-xl text-secondary font-bold mt-1">100% Watermarked</div>
+<div class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">verified</span> Encrypted EXIF + Lat/Lon stamp
+          </div>
+</div>
+<div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-space-sm px-space-md rounded-l-lg">Timestamp</th>
+<th class="py-space-sm px-space-md">Target Employee</th>
+<th class="py-space-sm px-space-md">Accuracy Error</th>
+<th class="py-space-sm px-space-md">Mock Provider Check</th>
+<th class="py-space-sm px-space-md">Selfie Watermark</th>
+<th class="py-space-sm px-space-md text-right rounded-r-lg">Audit Verdict</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest/60 font-body-md text-body-md">
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md font-data-mono text-body-sm text-on-surface">
+              08:41:09 PST
+            </td>
+<td class="py-space-md px-space-md font-medium text-on-surface">
+              Marco Santos <span class="text-on-surface-variant text-body-sm">(EMP-8821)</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-data-mono text-tertiary-container font-semibold">±6.8m</span>
+<span class="text-on-surface-variant text-[11px] block">High Precision Fix</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 text-tertiary-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Hardware Native
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-data-mono text-[11px]">
+                PASS #EXIF-9912A
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<span class="px-2.5 py-1 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Mode C Punch Valid
+              </span>
+</td>
+</tr>
+<tr class="bg-error-container/20 hover:bg-error-container/30 transition-colors">
+<td class="py-space-md px-space-md font-data-mono text-body-sm text-on-surface">
+              08:34:22 PST
+            </td>
+<td class="py-space-md px-space-md font-medium text-on-surface">
+              Arnold V. (Floor Trainee) <span class="text-on-surface-variant text-body-sm">(EMP-9932)</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-data-mono text-primary-container font-bold">±42.0m</span>
+<span class="text-primary-container text-[11px] block">Exceeds 15m Threshold</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 text-primary-container font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[16px]">cancel</span> FAKE_GPS Detected
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-error-container text-on-error-container font-data-mono text-[11px]">
+                FAIL: NO METADATA
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<span class="px-2.5 py-1 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">block</span> Rejected & Flagged
+              </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="py-space-md px-space-md font-data-mono text-body-sm text-on-surface">
+              08:29:50 PST
+            </td>
+<td class="py-space-md px-space-md font-medium text-on-surface">
+              Sarah Jenkins <span class="text-on-surface-variant text-body-sm">(EMP-3104)</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-data-mono text-tertiary-container font-semibold">±8.1m</span>
+<span class="text-on-surface-variant text-[11px] block">SSID WestMall_Guest_Secure</span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 text-tertiary-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Hardware Native
+              </span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-data-mono text-[11px]">
+                PASS #EXIF-8804W
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<span class="px-2.5 py-1 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> In-Store Punch Valid
+              </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<script>
+  function toggleModeC(employeeKey, isChecked) {
+    const badge = document.getElementById(`badge-${employeeKey}`);
+    const row = document.querySelector(`tr[data-employee="${employeeKey}"]`);
+    if (!badge || !row) return;
+
+    const modeCell = row.children[2];
+
+    if (isChecked) {
+      badge.className = "px-space-sm py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold inline-flex items-center gap-1 shadow-sm";
+      badge.innerHTML = '<span class="material-symbols-outlined text-[15px]">electric_bolt</span> Remote Errand Approved';
+      modeCell.innerHTML = '<span class="font-data-mono text-data-mono text-secondary font-medium">MODE-C (Remote OK)</span>';
+    } else {
+      badge.className = "px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium inline-flex items-center gap-1";
+      badge.innerHTML = '<span class="material-symbols-outlined text-[15px]">store</span> In-Store Enforced';
+      modeCell.innerHTML = '<span class="font-data-mono text-data-mono text-on-surface-variant">STANDARD (Strict In-Store)</span>';
+    }
+  }
+
+  document.getElementById('btn-grant-field')?.addEventListener('click', () => {
+    ['marco', 'benigno'].forEach(emp => {
+      const toggle = document.getElementById(`toggle-${emp}`);
+      if (toggle) {
+        toggle.checked = true;
+        toggleModeC(emp, true);
+      }
+    });
+  });
+
+  document.getElementById('btn-reset-strict')?.addEventListener('click', () => {
+    ['marco', 'liza', 'benigno', 'sarah'].forEach(emp => {
+      const toggle = document.getElementById(`toggle-${emp}`);
+      if (toggle) {
+        toggle.checked = false;
+        toggleModeC(emp, false);
+      }
+    });
+  });
+
+  document.getElementById('btn-save-geofence')?.addEventListener('click', function() {
+    const originalText = this.innerHTML;
+    this.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span> <span>Syncing Nodes...</span>';
+    setTimeout(() => {
+      this.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span> <span>Perimeters Applied!</span>';
+      setTimeout(() => {
+        this.innerHTML = originalText;
+      }, 2000);
+    }, 800);
+  });
+
+  const searchInput = document.getElementById('employee-search');
+  const roleFilter = document.getElementById('role-filter');
+  const branchFilter = document.getElementById('branch-filter');
+
+  function filterEmployees() {
+    const q = (searchInput?.value || '').toLowerCase();
+    const role = roleFilter?.value || 'all';
+    const branch = branchFilter?.value || 'all';
+
+    const rows = document.querySelectorAll('#employee-rows tr');
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      const rRole = row.getAttribute('data-role');
+      const rBranch = row.getAttribute('data-branch');
+
+      const matchSearch = text.includes(q);
+      const matchRole = role === 'all' || rRole === role;
+      const matchBranch = branch === 'all' || rBranch === branch;
+
+      if (matchSearch && matchRole && matchBranch) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+
+  searchInput?.addEventListener('input', filterEmployees);
+  roleFilter?.addEventListener('change', filterEmployees);
+  branchFilter?.addEventListener('change', filterEmployees);
+</script></main></div></body></html>

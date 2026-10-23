@@ -1,0 +1,10 @@
+{
+  "name": "Jaytees Employee Attendance & Monitoring",
+  "short_name": "Jaytees Time",
+  "description": "Mobile-first employee Time In and Time Out with live camera and branch geofence verification.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0284c7",
+  "orientation": "portrait-primary"
+}
