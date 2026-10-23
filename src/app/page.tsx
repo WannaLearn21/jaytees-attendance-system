@@ -15,6 +15,9 @@ import {
   INITIAL_SHIFTS,
   getInitialAttendanceLogs,
 } from "@/lib/mockData";
+import { AuthSession, clearSession, getStoredSession, saveSession } from "@/lib/auth";
+import { LoginScreen } from "@/components/LoginScreen";
+import { EmployeeAccountModal } from "@/components/EmployeeAccountModal";
 import { LiveOperationsDashboard } from "@/components/LiveOperationsDashboard";
 import { MobilePunchStation } from "@/components/MobilePunchStation";
 import BranchGeofencesControls from "@/components/BranchGeofencesControls";
@@ -30,7 +33,8 @@ type ActiveScreen =
 
 export default function JayteesAttendanceApp() {
   const [activeScreen, setActiveScreen] = useState<ActiveScreen>("dashboard");
-  const [role, setRole] = useState<AccessRole>("SYSAD");
+  const [session, setSession] = useState<AuthSession | null>(null);
+  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
 
   const [branches, setBranches] = useState<Branch[]>(INITIAL_BRANCHES);
   const [shifts, setShifts] = useState<ShiftTemplate[]>(INITIAL_SHIFTS);
@@ -57,15 +61,48 @@ export default function JayteesAttendanceApp() {
   useEffect(() => {
     setMounted(true);
     setLogs(getInitialAttendanceLogs());
+    
+    // Check for stored PWA session
+    const stored = getStoredSession();
+    if (stored) {
+      setSession(stored);
+      if (stored.role === "USER") {
+        setActiveScreen("punch-station");
+        setSelectedEmpId(stored.userId);
+      }
+    }
+
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
     return () => clearInterval(timer);
   }, []);
 
+  const role: AccessRole = session?.role || "SYSAD";
+
+  // Login handler
+  const handleLoginSuccess = (newSession: AuthSession) => {
+    setSession(newSession);
+    setSelectedEmpId(newSession.userId);
+    if (newSession.role === "USER") {
+      setActiveScreen("punch-station");
+    } else {
+      setActiveScreen("dashboard");
+    }
+  };
+
+  // Sign out
+  const handleSignOut = () => {
+    clearSession();
+    setSession(null);
+  };
+
   // Switch active persona / screen when RBAC Role is changed
   const handleSelectRole = (nextRole: AccessRole) => {
-    setRole(nextRole);
+    if (!session) return;
+    const updated: AuthSession = { ...session, role: nextRole };
+    setSession(updated);
+    saveSession(updated);
     if (nextRole === "USER") {
       setActiveScreen("punch-station");
     }
@@ -120,6 +157,11 @@ export default function JayteesAttendanceApp() {
     );
   };
 
+  // Add new employee account (Admin / SysAd)
+  const handleSaveEmployeeAccount = (newEmp: Employee) => {
+    setEmployees((prev) => [newEmp, ...prev]);
+  };
+
   // Update Shift Grace Period
   const handleUpdateShiftGrace = (
     shiftId: string,
@@ -169,7 +211,6 @@ export default function JayteesAttendanceApp() {
         });
       },
       () => {
-        // Fallback if denied
         handleSimulateGpsBranch(branches[0]);
       },
       { enableHighAccuracy: true, timeout: 8000 }
@@ -204,16 +245,22 @@ export default function JayteesAttendanceApp() {
     );
   };
 
+  // Show Login Screen if no active session
+  if (!session) {
+    return (
+      <LoginScreen
+        employees={employees}
+        branches={branches}
+        onLoginSuccess={handleLoginSuccess}
+      />
+    );
+  }
+
   const activeEmployee =
     employees.find((e) => e.id === selectedEmpId) || employees[0];
 
-  // Active Persona for Top Right Header
   const headerPersona =
-    role === "SYSAD"
-      ? employees.find((e) => e.id === "emp-elena") || employees[4]
-      : role === "ADMIN"
-      ? employees.find((e) => e.id === "emp-carla") || employees[6]
-      : activeEmployee;
+    employees.find((e) => e.id === session.userId) || activeEmployee;
 
   const formattedClock = mounted
     ? currentTime.toLocaleTimeString("en-US", {
@@ -253,6 +300,12 @@ export default function JayteesAttendanceApp() {
     },
   ];
 
+  // Restrict navigation items for USER role
+  const visibleNavItems =
+    role === "USER"
+      ? navItems.filter((i) => i.id === "punch-station")
+      : navItems;
+
   const storagePercent = Math.round((storageUsedMb / 1000) * 100);
 
   return (
@@ -272,7 +325,7 @@ export default function JayteesAttendanceApp() {
               Operational Navigation
             </div>
             <nav className="flex flex-col gap-space-xs mt-space-xs">
-              {navItems.map((item) => {
+              {visibleNavItems.map((item) => {
                 const isActive = activeScreen === item.id;
                 return (
                   <button
@@ -296,12 +349,27 @@ export default function JayteesAttendanceApp() {
             </nav>
           </div>
 
-          {/* Interactive 3-Tier RBAC Switcher inside Sidebar for rapid testing */}
+          {/* Admin Action: Add Employee Account */}
+          {(role === "SYSAD" || role === "ADMIN") && (
+            <div className="px-space-md pt-space-xs">
+              <button
+                onClick={() => setShowCreateAccountModal(true)}
+                className="w-full h-11 px-space-md rounded-xl bg-secondary-fixed text-on-secondary-fixed font-label-md font-bold flex items-center justify-center gap-1.5 shadow-sm hover:bg-secondary-fixed-dim transition-all"
+              >
+                <span className="material-symbols-outlined text-[18px]">
+                  person_add
+                </span>
+                <span>New Employee Account</span>
+              </button>
+            </div>
+          )}
+
+          {/* Interactive 3-Tier RBAC Switcher inside Sidebar */}
           <div className="px-space-md pt-space-sm">
             <div className="p-space-sm rounded-xl bg-surface-container-low border border-outline-variant/30">
               <div className="flex items-center justify-between mb-1.5 px-1">
                 <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
-                  3-Tier RBAC Simulator
+                  Role Simulator
                 </span>
                 <span className="px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-data-mono text-[10px] font-bold">
                   {role}
@@ -326,8 +394,8 @@ export default function JayteesAttendanceApp() {
           </div>
         </div>
 
-        {/* Bottom Supabase Cache Gauge */}
-        <div className="p-space-md bg-surface-container-low m-space-md rounded-xl">
+        {/* Bottom Supabase Cache Gauge & Sign Out */}
+        <div className="p-space-md bg-surface-container-low m-space-md rounded-xl flex flex-col gap-space-xs">
           <div className="flex items-center justify-between">
             <span className="font-label-sm text-label-sm text-on-surface-variant uppercase">
               Supabase Cache
@@ -336,13 +404,13 @@ export default function JayteesAttendanceApp() {
               {storagePercent}% Used
             </span>
           </div>
-          <div className="w-full bg-surface-container-highest h-1.5 rounded-full mt-space-xs overflow-hidden">
+          <div className="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
             <div
               className="bg-tertiary-container h-full transition-all duration-500"
               style={{ width: `${storagePercent}%` }}
             ></div>
           </div>
-          <div className="flex items-center justify-between mt-space-xs">
+          <div className="flex items-center justify-between mt-1">
             <span className="font-body-sm text-body-sm text-on-surface-variant">
               Purge Active
             </span>
@@ -350,6 +418,13 @@ export default function JayteesAttendanceApp() {
               {storageUsedMb}MB/1GB
             </span>
           </div>
+          <button
+            onClick={handleSignOut}
+            className="mt-2 w-full py-1.5 rounded-lg text-error hover:bg-error-container/20 font-label-sm font-bold flex items-center justify-center gap-1 transition-colors"
+          >
+            <span className="material-symbols-outlined text-[16px]">logout</span>
+            <span>Sign Out</span>
+          </button>
         </div>
       </aside>
 
@@ -373,7 +448,9 @@ export default function JayteesAttendanceApp() {
                   store
                 </span>
                 <span className="font-label-sm text-label-sm text-secondary font-medium">
-                  All 3 Branches (Main, Downtown, West Mall)
+                  {role === "SYSAD"
+                    ? "All 3 Branches (Main, Downtown, West Mall)"
+                    : branches.find((b) => b.id === session.branchId)?.name || "Branch"}
                 </span>
               </div>
 
@@ -384,7 +461,7 @@ export default function JayteesAttendanceApp() {
                     ? "SysAd Mode (3-Tier RBAC)"
                     : role === "ADMIN"
                     ? "Branch Admin Mode (RBAC)"
-                    : "Employee Punch Mode (RBAC)"}
+                    : "Employee Punch Terminal (PWA)"}
                 </span>
               </div>
             </div>
@@ -398,7 +475,7 @@ export default function JayteesAttendanceApp() {
                 }
                 className="h-9 px-2 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md border border-outline-variant/40"
               >
-                {navItems.map((item) => (
+                {visibleNavItems.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.label}
                   </option>
@@ -428,16 +505,18 @@ export default function JayteesAttendanceApp() {
                 </span>
               </div>
 
-              <button
-                onClick={() => setActiveScreen("punch-station")}
-                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold hover:bg-secondary-fixed-dim transition-colors"
-                title="Open Mobile Punch Station Simulator"
-              >
-                <span className="material-symbols-outlined text-[16px]">
-                  photo_camera_front
-                </span>
-                <span>Punch Kiosk</span>
-              </button>
+              {role !== "USER" && (
+                <button
+                  onClick={() => setActiveScreen("punch-station")}
+                  className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold hover:bg-secondary-fixed-dim transition-colors"
+                  title="Open Mobile Punch Station Simulator"
+                >
+                  <span className="material-symbols-outlined text-[16px]">
+                    photo_camera_front
+                  </span>
+                  <span>Punch Kiosk</span>
+                </button>
+              )}
 
               <div className="flex items-center gap-space-sm pl-space-xs">
                 <img
@@ -454,6 +533,16 @@ export default function JayteesAttendanceApp() {
                   </span>
                 </div>
               </div>
+
+              <button
+                onClick={handleSignOut}
+                className="p-1.5 text-on-surface-variant hover:text-error hover:bg-surface-container rounded-lg transition-colors"
+                title="Sign Out"
+              >
+                <span className="material-symbols-outlined text-[20px]">
+                  logout
+                </span>
+              </button>
             </div>
           </div>
         </header>
@@ -524,6 +613,17 @@ export default function JayteesAttendanceApp() {
           )}
         </main>
       </div>
+
+      {/* New Employee Account Modal */}
+      <EmployeeAccountModal
+        isOpen={showCreateAccountModal}
+        onClose={() => setShowCreateAccountModal(false)}
+        currentUserRole={role}
+        currentUserBranchId={session.branchId}
+        branches={branches}
+        shifts={shifts}
+        onSaveEmployee={handleSaveEmployeeAccount}
+      />
     </div>
   );
 }
