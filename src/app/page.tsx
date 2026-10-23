@@ -81,8 +81,9 @@ export default function JayteesAttendanceApp() {
     longitude: INITIAL_BRANCHES[0].longitude + 0.00008,
     accuracyMeters: 12,
     isSimulated: true,
-    label: "Inside Jaytees Flagship / Main Store (18m)",
+    label: "Inside Jaytees Tagaytay Maharlika (Main Branch) (~18m)",
   });
+
 
   // Live PST Clock
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
@@ -259,13 +260,14 @@ export default function JayteesAttendanceApp() {
 
   const handleSimulateGpsOutside = () => {
     setCurrentGps({
-      latitude: 14.5588,
-      longitude: 121.0315,
+      latitude: 14.1165,
+      longitude: 120.9580,
       accuracyMeters: 14,
       isSimulated: true,
-      label: "Off-Site Client / BDO Bank Errand (~850m from Store)",
+      label: "Off-Site Errand • Mahogany Beef Market & BDO Tagaytay Rotunda (~850m from Store)",
     });
   };
+
 
   const handleRequestRealGps = () => {
     if (!navigator.geolocation) return;

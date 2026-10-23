@@ -256,8 +256,7 @@ export default function BranchGeofencesControls({
                   </h2>
                 </div>
                 <p className="font-body-sm text-body-sm text-on-surface-variant">
-                  Live telemetry from {branches.length} configured Metro Manila
-                  retail locations
+                  Live telemetry from {branches.length} configured Jaytees Tagaytay & Cavite locations (Maharlika, Rotunda, Perfect View)
                 </p>
               </div>
               <div className="flex items-center gap-2">

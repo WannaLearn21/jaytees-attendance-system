@@ -8,38 +8,38 @@ INSERT INTO public.branches (id, branch_code, name, short_name, address, ssid, l
 VALUES
   (
     '11111111-1111-1111-1111-111111111111',
-    'JTS-HQ-01',
-    'Jaytees Flagship / Main Store',
-    'Main Store',
-    'Makati Flagship Hub, Metro Manila',
-    'Jaytees_HQ_5G',
-    14.5547,
-    121.0244,
+    'JTS-MHL-01',
+    'Jaytees Tagaytay Maharlika (Main Branch)',
+    'Maharlika Main',
+    'Emilio Aguinaldo Hwy, Maharlika East, Tagaytay City, Cavite',
+    'Jaytees_Maharlika_5G',
+    14.1023,
+    120.9522,
     150,
     true
   ),
   (
     '22222222-2222-2222-2222-222222222222',
-    'JTS-DT-02',
-    'Downtown Outlet',
-    'Downtown',
-    'Downtown Retail Strip, Manila',
-    'Jaytees_DT_POS',
-    14.5512,
-    121.0289,
+    'JTS-RTD-02',
+    'Jaytees Rotunda',
+    'Rotunda',
+    'Tagaytay Rotunda, Silang Crossing Junction, Tagaytay City, Cavite',
+    'Jaytees_Rotunda_POS',
+    14.1153,
+    120.9621,
     120,
     true
   ),
   (
     '33333333-3333-3333-3333-333333333333',
-    'JTS-WM-03',
-    'West Mall Kiosk / Store',
-    'West Mall',
-    'West Mall Ground Concourse, Mandaluyong',
-    'WestMall_Guest_Secure',
-    14.5610,
-    121.0312,
-    100,
+    'JTS-PV9-09',
+    'Jaytees Perfect View (9th Branch)',
+    'Perfect View (9th)',
+    'Tagaytay-Nasugbu Hwy, Laurel Ridge (Overlooking Taal Lake), Batangas',
+    'Jaytees_PerfectView_WiFi',
+    14.0742,
+    120.8525,
+    180,
     true
   )
 ON CONFLICT (id) DO UPDATE SET
@@ -47,6 +47,7 @@ ON CONFLICT (id) DO UPDATE SET
   radius_m = EXCLUDED.radius_m,
   lat = EXCLUDED.lat,
   lng = EXCLUDED.lng;
+
 
 -- 2. Insert Standard Shift Templates for Flagship Main Store
 INSERT INTO public.shift_templates (id, branch_id, name, badge_text, description, start_time, end_time, grace_minutes)
