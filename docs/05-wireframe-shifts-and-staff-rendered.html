@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Shifts and staff</title>
+<script src="58985956-b753-42c8-95f2-e02b77986e67"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1B1B1A}
+a{color:#1B1B1A;text-decoration:none}
+.nav{display:block;padding:12px 16px;border-radius:8px;font-size:16px;font-weight:600}
+.nav.act{background:#1B1B1A;color:#fff}
+.card{background:#fff;border:1px solid #C9C9C4;border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;padding:12px 16px;color:#4A4A47;font-size:13px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #C9C9C4}
+td{padding:10px 16px;border-bottom:1px solid #E3E3DF}
+.btn{height:40px;padding:0 16px;border:1px solid #6B6B67;border-radius:8px;background:#fff;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.pri{background:#1B1B1A;color:#fff;border-color:#1B1B1A}
+.ph{display:inline-block;width:36px;height:36px;border-radius:6px;background:#D9D9D4;border:1px dashed #6B6B67;vertical-align:middle}
+h1{margin:0;font-size:28px}
+</style>
+</helmet>
+<div style="display:flex;min-height:720px;background:#F4F4F2">
+<nav style="width:220px;flex:none;background:#fff;border-right:1px solid #C9C9C4;padding:20px 12px;display:flex;flex-direction:column;gap:4px;box-sizing:border-box">
+<div style="font-size:20px;font-weight:800;padding:0 16px 16px">Jaytees JATS</div>
+<a class="nav " href="#">Live attendance</a>
+<a class="nav act" href="#">Staff and shifts</a>
+<a class="nav " href="#">Payroll export</a>
+<div style="font-size:12px;color:#4A4A47;padding:16px 16px 4px;text-transform:uppercase;letter-spacing:.04em">SysAd only</div>
+<a class="nav" href="#">Branches and geofence</a>
+<a class="nav" href="#">Photo storage</a>
+</nav>
+<main style="flex:1;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:20px;box-sizing:border-box">
+<h1>Shifts and staff · Branch 1</h1>
+<div style="display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start">
+<div class="card">
+<div style="padding:16px;font-weight:700;border-bottom:1px solid #C9C9C4">Shift templates</div>
+<div style="padding:14px 16px;border-bottom:1px solid #E3E3DF;display:flex;justify-content:space-between;align-items:center"><div><b>Opening</b><div style="font-size:14px;color:#4A4A47">7:00 AM – 3:00 PM · grace 5 min</div></div><button class="btn">Edit</button></div>
+<div style="padding:14px 16px;border-bottom:1px solid #E3E3DF;display:flex;justify-content:space-between;align-items:center"><div><b>Mid</b><div style="font-size:14px;color:#4A4A47">10:00 AM – 6:00 PM · grace 5 min</div></div><button class="btn">Edit</button></div>
+<div style="padding:14px 16px;border-bottom:1px solid #E3E3DF;display:flex;justify-content:space-between;align-items:center"><div><b>Closing</b><div style="font-size:14px;color:#4A4A47">2:00 PM – 10:00 PM · grace 5 min</div></div><button class="btn">Edit</button></div>
+<div style="padding:16px"><button class="btn">Add shift template</button></div>
+</div>
+<div class="card" style="overflow-x:auto">
+<div style="padding:16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #C9C9C4"><b>Staff</b><button class="btn pri">Add employee</button></div>
+<sc-raw-table>
+<sc-raw-tr><sc-raw-th>Employee</sc-raw-th><sc-raw-th>Role</sc-raw-th><sc-raw-th>Default shift</sc-raw-th><sc-raw-th>Allow off-site Time Out</sc-raw-th><sc-raw-th></sc-raw-th></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>[Employee 1]</sc-raw-td><sc-raw-td>User</sc-raw-td><sc-raw-td>Opening</sc-raw-td><sc-raw-td><input type="checkbox" aria-label="Allow off-site Time Out for Employee 1" style="width:24px;height:24px"></sc-raw-td><sc-raw-td><button class="btn">Edit</button></sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>[Employee 2]</sc-raw-td><sc-raw-td>User</sc-raw-td><sc-raw-td>Opening</sc-raw-td><sc-raw-td><input type="checkbox" aria-label="Allow off-site Time Out for Employee 2" style="width:24px;height:24px"></sc-raw-td><sc-raw-td><button class="btn">Edit</button></sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>[Employee 3]</sc-raw-td><sc-raw-td>User</sc-raw-td><sc-raw-td>Opening</sc-raw-td><sc-raw-td><input type="checkbox" checked="" aria-label="Allow off-site Time Out for Employee 3" style="width:24px;height:24px"></sc-raw-td><sc-raw-td><button class="btn">Edit</button></sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>[Employee 4]</sc-raw-td><sc-raw-td>Admin</sc-raw-td><sc-raw-td>Mid</sc-raw-td><sc-raw-td><input type="checkbox" aria-label="Allow off-site Time Out for Employee 4" style="width:24px;height:24px"></sc-raw-td><sc-raw-td><button class="btn">Edit</button></sc-raw-td></sc-raw-tr>
+</sc-raw-table>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:720}}">
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+
+
+</body></html>

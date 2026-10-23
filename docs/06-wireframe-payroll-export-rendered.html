@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Payroll export</title>
+<script src="da4c44e7-c90b-4286-8105-55ad2f0167cc"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1B1B1A}
+a{color:#1B1B1A;text-decoration:none}
+.nav{display:block;padding:12px 16px;border-radius:8px;font-size:16px;font-weight:600}
+.nav.act{background:#1B1B1A;color:#fff}
+.card{background:#fff;border:1px solid #C9C9C4;border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;padding:12px 16px;color:#4A4A47;font-size:13px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #C9C9C4}
+td{padding:10px 16px;border-bottom:1px solid #E3E3DF}
+.btn{height:40px;padding:0 16px;border:1px solid #6B6B67;border-radius:8px;background:#fff;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.pri{background:#1B1B1A;color:#fff;border-color:#1B1B1A}
+.ph{display:inline-block;width:36px;height:36px;border-radius:6px;background:#D9D9D4;border:1px dashed #6B6B67;vertical-align:middle}
+h1{margin:0;font-size:28px}
+</style>
+</helmet>
+<div style="display:flex;min-height:720px;background:#F4F4F2">
+<nav style="width:220px;flex:none;background:#fff;border-right:1px solid #C9C9C4;padding:20px 12px;display:flex;flex-direction:column;gap:4px;box-sizing:border-box">
+<div style="font-size:20px;font-weight:800;padding:0 16px 16px">Jaytees JATS</div>
+<a class="nav " href="#">Live attendance</a>
+<a class="nav " href="#">Staff and shifts</a>
+<a class="nav act" href="#">Payroll export</a>
+<div style="font-size:12px;color:#4A4A47;padding:16px 16px 4px;text-transform:uppercase;letter-spacing:.04em">SysAd only</div>
+<a class="nav" href="#">Branches and geofence</a>
+<a class="nav" href="#">Photo storage</a>
+</nav>
+<main style="flex:1;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:20px;box-sizing:border-box">
+<h1>Payroll export</h1>
+<div class="card" style="padding:16px;display:flex;gap:16px;align-items:end;flex-wrap:wrap">
+<label style="font-size:14px;font-weight:600">Branch<sc-raw-select style="display:block;font:inherit;height:40px;margin-top:4px"><option>Branch 1</option><option>All 3 branches</option></sc-raw-select></label>
+<label style="font-size:14px;font-weight:600">Period start<input type="date" style="display:block;font:inherit;height:40px;margin-top:4px"></label>
+<label style="font-size:14px;font-weight:600">Period end<input type="date" style="display:block;font:inherit;height:40px;margin-top:4px"></label>
+<button class="btn pri">Preview</button>
+</div>
+<div class="card" style="overflow-x:auto">
+<sc-raw-table>
+<sc-raw-tr><sc-raw-th>Code</sc-raw-th><sc-raw-th>Employee</sc-raw-th><sc-raw-th>Days present</sc-raw-th><sc-raw-th>Total hours</sc-raw-th><sc-raw-th>Late (min)</sc-raw-th><sc-raw-th>Undertime (min)</sc-raw-th><sc-raw-th>Incomplete days</sc-raw-th></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>JT-0001</sc-raw-td><sc-raw-td>[Employee 1]</sc-raw-td><sc-raw-td>11</sc-raw-td><sc-raw-td>88.4</sc-raw-td><sc-raw-td>0</sc-raw-td><sc-raw-td>0</sc-raw-td><sc-raw-td>0</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>JT-0002</sc-raw-td><sc-raw-td>[Employee 2]</sc-raw-td><sc-raw-td>11</sc-raw-td><sc-raw-td>87.9</sc-raw-td><sc-raw-td>24</sc-raw-td><sc-raw-td>0</sc-raw-td><sc-raw-td>0</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>JT-0003</sc-raw-td><sc-raw-td>[Employee 3]</sc-raw-td><sc-raw-td>10</sc-raw-td><sc-raw-td>79.2</sc-raw-td><sc-raw-td>0</sc-raw-td><sc-raw-td>35</sc-raw-td><sc-raw-td>1</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>JT-0004</sc-raw-td><sc-raw-td>[Employee 4]</sc-raw-td><sc-raw-td>12</sc-raw-td><sc-raw-td>95.6</sc-raw-td><sc-raw-td>5</sc-raw-td><sc-raw-td>0</sc-raw-td><sc-raw-td>0</sc-raw-td></sc-raw-tr>
+</sc-raw-table>
+</div>
+<div style="display:flex;gap:12px"><button class="btn pri">Export CSV</button><button class="btn">Export Excel</button></div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:720}}">
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+
+
+</body></html>

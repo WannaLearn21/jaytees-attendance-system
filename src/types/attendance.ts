@@ -80,3 +80,18 @@ export interface GpsPosition {
   isSimulated: boolean;
   label: string;
 }
+
+export interface AuditLogEntry {
+  id: string;
+  tableName: string;
+  recordId: string;
+  action: "INSERT" | "UPDATE" | "CORRECTION" | "PURGE";
+  changedBy: string;
+  changedByName: string;
+  branchId?: string;
+  reason: string;
+  oldData?: Record<string, any>;
+  newData?: Record<string, any>;
+  createdAt: string;
+}
+
